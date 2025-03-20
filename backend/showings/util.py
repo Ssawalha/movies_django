@@ -2,7 +2,6 @@ from datetime import datetime
 from fuzzywuzzy import fuzz
 from fuzzywuzzy import process
 import pandas as pd
-from pprint import pprint
 
 def get_current_year():
     return datetime.now().strftime('%Y')
@@ -59,17 +58,13 @@ def handle_perfect_match_titles(*args):
         merged_df = pd.merge(merged_df, df, on='normalized_title', how='outer', suffixes=('', f'_{suffix}'))
 
     merged_df = merged_df.fillna('')
-    print("Perfect Match DataFrame:\n", merged_df)
     return format_merged_titles(merged_df)
 
 def should_merge_fuzzy_match_titles(title_a, title_b):
     if (title_a['prime_id'] and title_b['prime_id']) or \
     (title_a['grand_id'] and title_b['grand_id']) or \
     (title_a['taj_id'] and title_b['taj_id']):
-        print(f"Not merging: {title_a} and {title_b}")
         return False
-    print(f"Should merge: {title_a} and {title_b}")
-
     return True
 
 def get_first_non_empty(*values):
@@ -99,49 +94,65 @@ def merge_fuzzy_match_titles(title_a, title_b):
         'taj_id': get_first_non_empty(title_a.get('taj_id'), title_b.get('taj_id')),
         'title': title
     }
-    print(f"merge_fuzzy_match_titles: {merged}")
     return merged
 
 def fuzzy_match_titles(titles):
     titles_df = pd.DataFrame(titles)
-    titles_df['fuzzy_match'] = None
+    titles_df['fuzzy_matches'] = None
 
     for i, row in titles_df.iterrows():
         title = row['normalized_title']
         # Exclude the current row from the list of potential matches
-        potential_matches = titles_df[titles_df.index != i]['normalized_title'].tolist()
-        best_match = process.extractOne(title, potential_matches, scorer=fuzz.ratio)
-        if best_match and best_match[1] > 70:
-            titles_df.at[i, 'fuzzy_match'] = best_match[0]
+        other_rows = titles_df[titles_df.index != i]
+        # Get all matches above threshold (70)
+        matches = process.extract(title, other_rows['normalized_title'].tolist(), scorer=fuzz.ratio, limit=None)
+        # Filter matches above threshold and get indices of matching rows
+        good_matches = [other_rows.index[other_rows['normalized_title'] == match[0]].item() 
+                       for match in matches if match[1] > 70]
+        
+        if good_matches:
+            titles_df.at[i, 'fuzzy_matches'] = good_matches
 
     return titles_df
 
 def handle_fuzzy_match_titles(titles):
     # TODO refactor. Wrong and spaghetti.
     handled_titles = []
+    processed_indices = set()
     titles_df = fuzzy_match_titles(titles)
-    for i, row in titles_df.iterrows():
-        for j, row2 in titles_df.iterrows():
-            if i != j:
-                if row['normalized_title'] == row2['fuzzy_match'] and should_merge_fuzzy_match_titles(row, row2):
-                    merged = merge_fuzzy_match_titles(row.to_dict(), row2.to_dict())
-                    handled_titles.append(merged)
-
-                    # Remove the merged titles from the list
-                    titles_df = titles_df.drop([titles_df.index[i], j])
-                    break # back to main loop. We need to recheck the current row with the new list
     
-    # Add the remaining titles that didn't match
-    titles_df = titles_df.drop('fuzzy_match', axis=1)
-    for i, row in titles_df.iterrows():
-        handled_titles.append(row.to_dict())
-    print("Fuzzy Merged Titles:\n", handled_titles)
+    # Add column with number of matches and sort
+    titles_df['match_count'] = titles_df['fuzzy_matches'].apply(lambda x: len(x) if isinstance(x, list) else 0)
+    titles_df = titles_df.sort_values('match_count', ascending=False)
+
+    # Iterate through rows in order of most matches
+    for idx, row in titles_df.iterrows():
+        if idx in processed_indices:
+            continue
+            
+        processed_indices.add(idx)
+        current_merged = row.to_dict()
+        
+        # If row has matches, merge with each match
+        if isinstance(row['fuzzy_matches'], list):
+            for match_idx in row['fuzzy_matches']:
+                if match_idx not in processed_indices:
+                    match_row = titles_df.loc[match_idx]
+                    if should_merge_fuzzy_match_titles(current_merged, match_row):
+                        current_merged = merge_fuzzy_match_titles(current_merged, match_row.to_dict())
+                        processed_indices.add(match_idx)
+        
+        # Clean up extra fields before adding to results
+        if 'fuzzy_matches' in current_merged:
+            del current_merged['fuzzy_matches']
+        if 'match_count' in current_merged:
+            del current_merged['match_count']
+            
+        handled_titles.append(current_merged)    
     return handled_titles
 
 def match_titles(grand_titles, prime_titles, taj_titles):
     matched_titles = handle_perfect_match_titles(grand_titles, prime_titles, taj_titles)
     matched_titles = handle_fuzzy_match_titles(matched_titles)
-    print("FINALLY MATCHED TITLES:\n")
-    pprint(matched_titles)
     return matched_titles
 
