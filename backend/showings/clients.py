@@ -19,9 +19,7 @@ class GrandClient:
             body = {"cinemaId": "0000000002"}
             response = requests.post(url, data=body)
             response.raise_for_status()
-            response.raise_for_status()
             return response.content
-
         except Exception as e:
             logger.error(f"{__class__.__name__} An error occurred: {e}")
             raise GrandClient.GrandClientError(f"An error occurred: {e}")
@@ -35,8 +33,8 @@ class GrandClient:
                 "movieId": grand_title_id,
             }
             response = requests.post(url, data=body)
+            response.raise_for_status()
             return response.content
-
         except Exception as e:
             logger.error(f"{__class__.__name__} An error occurred: {e}")
             raise GrandClient.GrandClientError(f"An error occurred: {e}")
@@ -47,8 +45,8 @@ class GrandClient:
             url = f"{GRAND_BASE_URL}/handlers/getsessionTime.ashx"
             body = {"cinemaId": "0000000002", "movieId": grand_title_id, "date": date}
             response = requests.post(url, data=body)
+            response.raise_for_status()
             return response.content
-
         except Exception as e:
             logger.error(f"{__class__.__name__} An error occurred: {e}")
             raise GrandClient.GrandClientError(f"An error occurred: {e}")
