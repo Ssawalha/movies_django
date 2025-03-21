@@ -17,7 +17,6 @@ from showings.util import (
     should_merge_fuzzy_match_titles,
     get_first_non_empty,
     merge_fuzzy_match_titles,
-    fuzzy_match_titles,
     handle_fuzzy_match_titles,
     match_titles,
 )
@@ -286,29 +285,6 @@ class TestUtil(unittest.TestCase):
             expected,
             get_first_non_empty(title_b.get("prime_id"), title_a.get("prime_id")),
         )
-
-    def test__fuzzy_match_titles(self):
-        title_a = {
-            "title": "The Matrix 3",
-            "prime_id": "1yts",
-            "grand_id": "",
-            "taj_id": "",
-            "title_prime": "The Matrix 3",
-            "title_grand": "",
-            "title_taj": "",
-            "normalized_title": "the matrix 3",
-        }
-        title_b = {
-            "title": "  The Matrix   ",
-            "prime_id": "",
-            "grand_id": "1abc",
-            "taj_id": "",
-            "title_grand": "  The Matrix   ",
-            "title_prime": "",
-            "title_taj": "",
-            "normalized_title": "the matrix",
-        }
-        expected = "1yts"
 
 
 class TestMovieTitleMatching(unittest.TestCase):

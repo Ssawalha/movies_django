@@ -11,21 +11,6 @@ class GrandParser:
 
     @staticmethod
     def parse_titles_from_titles_page(titles_page) -> list:
-        # CAN TRY Parsing from the QUICK BOOK component.
-        # TODO Check if Quick Book and seperate title page details match, quickbook is likely much faster
-                    # soup = BeautifulSoup(GrandClient.get_titles_page(), 'lxml')
-            # # print(soup)
-            # quickbook = soup.find('div', class_='quickbook')
-            # print(quickbook)
-            # # locations = quickbook.find_all(
-            # #     'input', 
-            # #     type='radio', 
-            # #     class_='select-box__input'
-            # # )
-            # # for l in locations:
-            # #     print(l)
-            # #     if l['id'] != 'Cinema_0':
-            # #         location_name = l['id']
         try:
             soup = BeautifulSoup(titles_page, 'lxml')
             labels = soup.find_all('label')
