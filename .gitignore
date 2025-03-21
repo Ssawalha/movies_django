@@ -1,4 +1,5 @@
 # Django #
+*.sh
 *.log
 *.pot
 *.pyc
@@ -49,7 +50,6 @@ venv.bak/
 
 # Visual Studio Code #
 .vscode/*
-!.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json

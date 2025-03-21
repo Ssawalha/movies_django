@@ -1,6 +1,5 @@
 import unittest
 from datetime import datetime
-from pprint import pprint
 from unittest.mock import patch
 
 import pandas as pd
@@ -519,7 +518,7 @@ class TestMovieTitleMatching(unittest.TestCase):
         with self.assertRaises(ValueError):
             match_titles([], [], [])
 
-    def test_match_titles__perfect_match(self):
+    def test_match_titles(self):
         grand_titles = self.grand_titles
         prime_titles = self.prime_titles
         taj_titles = self.taj_titles

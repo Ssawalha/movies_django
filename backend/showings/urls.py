@@ -1,11 +1,8 @@
 from django.urls import path
 
-from . import views
+from .views import GetActiveShowingsView, ParseDataView
 
 urlpatterns = [
-    path("", views.index, name="index"),
-    path("active/", views.get_active_showings, name="active"),
-    path("<int:showing_id>/", views.get_showing, name="showing"),
-    path("parse/", views.parse_showings, name="parse"),
-    path("get_movies/", views.get_all_movies, name="get_movies"),
+    path("active/", GetActiveShowingsView.as_view(), name="active"),
+    path("parse/", ParseDataView.as_view(), name="parse"),
 ]
