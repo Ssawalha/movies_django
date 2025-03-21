@@ -53,4 +53,6 @@ venv.bak/
 !.vscode/tasks.json 
 !.vscode/launch.json 
 !.vscode/extensions.json 
+!.vscode/secrets.json.template
+.vscode/secrets.json
 .history

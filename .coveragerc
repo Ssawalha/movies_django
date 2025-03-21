@@ -1,0 +1,23 @@
+[run]
+source = showings/
+omit = 
+    **/tests/**
+    **/test_*.py
+    */__init__.py
+    */migrations/*
+    */settings.py
+    */manage.py
+
+[report]
+omit = 
+    **/tests/**
+    **/test_*.py
+    */__init__.py
+    */migrations/*
+    */settings.py
+    */manage.py
+
+exclude_lines =
+    pragma: no cover
+    def __repr__
+    raise NotImplementedError

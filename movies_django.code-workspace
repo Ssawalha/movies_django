@@ -1,0 +1,39 @@
+{
+    "folders": [
+        {
+            "path": "."
+        }
+    ],
+    "settings": {
+        "python.testing.unittestEnabled": true,
+        "python.testing.pytestEnabled": false,
+        "python.testing.nosetestsEnabled": false,
+        "python.testing.unittestArgs": [
+            "-v",
+            "-s",
+            "${secrets:PROJECT_BACKEND_DIR}",
+            "-p",
+            "test_*.py"
+        ],
+        "python.analysis.extraPaths": [
+            "${secrets:PROJECT_BACKEND_DIR}"
+        ],
+        "python.defaultInterpreterPath": "${secrets:PYTHON_INTERPRETER_PATH}",
+        "python.envFile": "${secrets:ENV_FILE_PATH}",
+        "python.testing.env": {
+            "DJANGO_SETTINGS_MODULE": "${secrets:DJANGO_SETTINGS_MODULE}",
+            "PYTHONPATH": "${secrets:PYTHONPATH}"
+        },
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit"
+        },
+        "files.exclude": {
+            "**/__pycache__": true,
+            "**/*.pyc": true,
+            "**/.pytest_cache": true,
+            "**/.coverage": true,
+            "**/htmlcov": true
+        }
+    }
+}
