@@ -7,7 +7,6 @@ from showings.parsers import GrandParser, PrimeParser, TajParser
 from showings.util import get_first_non_empty
 
 logger = logging.getLogger(__name__)
-# TODO SERIALIZERS!
 
 
 class GrandService:
@@ -192,7 +191,6 @@ class TitleMatchService:
 
     @staticmethod
     def handle_fuzzy_match_titles(titles):
-        # TODO refactor. Wrong and spaghetti.
         handled_titles = []
         processed_indices = set()
         titles_df = TitleMatchService.fuzzy_match_titles(titles)

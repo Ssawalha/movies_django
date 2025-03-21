@@ -5,7 +5,6 @@ from bs4 import BeautifulSoup
 from showings.util import get_current_month, get_current_year
 
 logger = logging.getLogger(__name__)
-# TODO SERIALIZERS!
 
 
 class GrandParser:
