@@ -1,6 +1,46 @@
 # Amman Movies
 
-A Django project for tracking movie showings across different cinemas in Amman.
+A Django project for tracking movie showings across different cinemas in Amman. The project aggregates showings from multiple cinema websites (Grand, Taj, and Prime) and provides a unified API for accessing movie schedules.
+
+## Features
+
+- Aggregates movie showings from multiple cinemas in Amman
+- RESTful API with OpenAPI documentation
+- Automatic data collection and parsing
+- Fuzzy matching for movie titles across different sources
+- Comprehensive test coverage
+- Modern development workflow with pre-commit hooks
+
+## Project Structure
+
+```
+movies_django/
+├── backend/                     # Django project directory
+│   ├── movie_showings/         # Project settings
+│   ├── showings/              # Main app
+│   │   ├── tests/            # Test files
+│   │   │   ├── test_models.py
+│   │   │   ├── test_views.py
+│   │   │   ├── test_util.py
+│   │   │   └── ...
+│   │   ├── migrations/       # Database migrations
+│   │   ├── models.py        # Data models
+│   │   ├── views.py         # View logic
+│   │   ├── urls.py          # URL routing
+│   │   ├── services.py      # Business logic
+│   │   ├── clients.py       # External API clients
+│   │   ├── parsers.py       # Data parsing
+│   │   └── util.py          # Utility functions
+│   ├── manage.py            # Django management script
+│   └── docs/                # Project documentation
+├── .vscode/                 # VS Code settings
+├── docs/                    # Project-wide documentation
+├── .venv/                   # Virtual environment
+├── requirements.txt         # Python dependencies
+├── .pre-commit-config.yaml  # Pre-commit hooks
+├── .gitignore              # Git ignore rules
+└── README.md               # Project documentation
+```
 
 ## Setup
 
@@ -33,7 +73,7 @@ A Django project for tracking movie showings across different cinemas in Amman.
    - Update the paths in `secrets.json` to match your environment
    - Install recommended VS Code extensions (Python, Django)
 
-5. Create a `.env` file in the root directory with your environment variables:
+5. Create a `.env` file in the backend directory with your environment variables:
 
    ```
    DJANGO_SECRET_KEY=your-secret-key
@@ -52,7 +92,24 @@ A Django project for tracking movie showings across different cinemas in Amman.
    python manage.py runserver
    ```
 
-## Testing
+## Development
+
+### Code Style
+
+The project uses:
+
+- `black` for code formatting
+- `isort` for import sorting
+- Pre-commit hooks for automated checks
+
+To format code manually:
+
+```bash
+black .
+isort .
+```
+
+### Testing
 
 The project uses Django's test runner with a custom configuration. To run tests:
 
@@ -63,28 +120,42 @@ The project uses Django's test runner with a custom configuration. To run tests:
    - Or click on individual test files to run specific tests
 
 2. From the command line:
+
    ```bash
    cd backend
    python manage.py test
    ```
 
-## Project Structure
+3. For coverage reports:
+   ```bash
+   coverage run -m unittest discover
+   coverage report
+   coverage html  # For HTML report
+   ```
 
-```
-movies_django/
-├── backend/                 # Django project directory
-│   ├── movie_showings/     # Project settings
-│   └── showings/          # Main app
-├── .vscode/               # VS Code settings
-│   ├── secrets.json      # Local environment settings (not in git)
-│   └── secrets.json.template  # Template for secrets.json
-├── movies_django.code-workspace  # Shared VS Code workspace settings
-└── requirements.txt      # Python dependencies
-```
+### API Documentation
 
-## Development
+The API documentation is available at `/api/schema/` when running the development server. It's generated using `drf-spectacular`.
 
-- The project uses Django's built-in test runner
-- Test files are in `backend/showings/tests/`
-- Use Faker for generating test data
-- Coverage reports are generated with `coverage run -m unittest discover`
+## Contributing
+
+1. Create a new branch for your feature:
+
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+
+2. Make your changes and commit them:
+
+   ```bash
+   git add .
+   git commit -m "feat: your feature description"
+   ```
+
+3. Push your changes:
+
+   ```bash
+   git push origin feature/your-feature-name
+   ```
+
+4. Create a pull request
