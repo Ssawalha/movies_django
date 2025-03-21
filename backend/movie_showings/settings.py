@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "drf_spectacular",  # API documentation
 ]
 
 MIDDLEWARE = [
@@ -129,3 +130,22 @@ PRIME_BASE_URL = "https://www.prime.jo"
 
 # Test configuration
 TEST_RUNNER = "showings.tests.test_runner.ShowingsTestRunner"
+
+# API Documentation
+REST_FRAMEWORK = {
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Amman Movies API",
+    "DESCRIPTION": "API for tracking movie showings across different cinemas in Amman",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+    "COMPONENT_SPLIT_REQUEST": True,
+    "SWAGGER_UI_SETTINGS": {
+        "deepLinking": True,
+        "persistAuthorization": True,
+        "displayOperationId": True,
+        "filter": True,
+    },
+}
