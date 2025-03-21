@@ -11,6 +11,21 @@ A Django project for tracking movie showings across different cinemas in Amman. 
 - Comprehensive test coverage
 - Modern development workflow with pre-commit hooks
 
+## Branching Strategy
+
+The project follows a three-branch strategy with `master` as the default branch:
+
+- `master` (default): Main development branch for ongoing work
+- `staging`: Testing branch for pre-production validation
+- `production`: Production branch for live deployment
+
+Workflow:
+
+1. Create feature branches from `master` (default branch)
+2. Merge feature branches into `master` after review
+3. Deploy `master` to `staging` for testing
+4. Once tested, merge `staging` into `production` for production deployment
+
 ## Project Structure
 
 ```
