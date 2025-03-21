@@ -6,8 +6,12 @@ from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.decorators.http import require_http_methods
 from showings.models import Batch, Location, Movie, Showing
-from showings.services import GrandService, PrimeService, TajService
-from showings.util import match_titles
+from showings.services import (
+    GrandService,
+    PrimeService,
+    TajService,
+    TitleMatchingService,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -65,7 +69,9 @@ class ParseDataView(View):
             prime_titles = PrimeService.get_titles()
             taj_titles = TajService.get_titles()
 
-            matched_titles = match_titles(grand_titles, prime_titles, taj_titles)
+            matched_titles = TitleMatchingService.match_titles(
+                grand_titles, prime_titles, taj_titles
+            )
             movies_created = 0
 
             for title_data in matched_titles:
