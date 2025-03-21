@@ -1,24 +1,23 @@
 import unittest
-from unittest.mock import patch
 from datetime import datetime
-import pandas as pd
-
 from pprint import pprint
+from unittest.mock import patch
 
+import pandas as pd
 from showings.util import (
-    get_current_year,
-    get_current_month,
-    normalize_title,
-    handle_raw_titles,
     format_merged_titles,
-    get_suffix,
-    is_merged_df,
-    handle_perfect_match_titles,
-    should_merge_fuzzy_match_titles,
+    get_current_month,
+    get_current_year,
     get_first_non_empty,
-    merge_fuzzy_match_titles,
+    get_suffix,
     handle_fuzzy_match_titles,
+    handle_perfect_match_titles,
+    handle_raw_titles,
+    is_merged_df,
     match_titles,
+    merge_fuzzy_match_titles,
+    normalize_title,
+    should_merge_fuzzy_match_titles,
 )
 
 

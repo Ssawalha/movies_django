@@ -1,6 +1,6 @@
-from django.db import models
-from django.core.validators import URLValidator
 from django.core.exceptions import ValidationError
+from django.core.validators import URLValidator
+from django.db import models
 from django.utils import timezone
 
 

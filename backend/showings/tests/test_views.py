@@ -12,7 +12,7 @@
 #             name="Test Cinema",
 #             address="Test Address"
 #         )
-        
+
 #     def test_get_active_showings(self):
 #         # Test with no showings
 #         response = self.client.get(reverse('active'))
@@ -25,8 +25,8 @@
 #             location=self.location,
 #             is_showing=True
 #         )
-        
+
 #         # Test with active showing
 #         response = self.client.get(reverse('active'))
 #         self.assertEqual(response.status_code, 200)
-#         self.assertIn(self.movie.title, response.content.decode()) 
+#         self.assertIn(self.movie.title, response.content.decode())

@@ -1,8 +1,8 @@
-from django.core.exceptions import ValidationError
-from django.utils import timezone
 from datetime import datetime, timedelta
 
-from showings.models import Location, Movie, Showing, Batch
+from django.core.exceptions import ValidationError
+from django.utils import timezone
+from showings.models import Batch, Location, Movie, Showing
 from showings.tests.test_base import ShowingsTestCase
 
 

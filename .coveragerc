@@ -1,6 +1,6 @@
 [run]
 source = showings/
-omit = 
+omit =
     **/tests/**
     **/test_*.py
     */__init__.py
@@ -9,7 +9,7 @@ omit =
     */manage.py
 
 [report]
-omit = 
+omit =
     **/tests/**
     **/test_*.py
     */__init__.py

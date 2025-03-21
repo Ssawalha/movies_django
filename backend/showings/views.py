@@ -1,14 +1,15 @@
-from django.http import HttpResponse
 import logging
 
+from django.http import HttpResponse
 from showings.models import Showing
-from showings.services import GrandService, TajService, PrimeService
+from showings.services import GrandService, PrimeService, TajService
 from showings.util import match_titles
 
 # TODO SERIALIZERS!
 logger = logging.getLogger(__name__)
 
 from pprint import pprint
+
 
 def index(request):
     return HttpResponse("AGGREGATED MOVIE SHOWINGS - JORDAN")
@@ -37,6 +38,7 @@ def get_all_movies(request):
 
     return HttpResponse(titles)
 
+
 def parse_showings(request):
 
     grand_titles = GrandService.get_titles()
@@ -45,7 +47,7 @@ def parse_showings(request):
     print(grand_titles)
     print(prime_titles)
     print(taj_titles)
-    return HttpResponse('SUCCESS')
+    return HttpResponse("SUCCESS")
 
 
 def test(request):
@@ -57,4 +59,3 @@ def test(request):
 def get_grand_showings(request):
     showings = GrandService.get_showings()
     return HttpResponse(showings)
-
