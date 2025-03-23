@@ -1,0 +1,967 @@
+
+
+<!DOCTYPE html>
+<html xmlns:fb="http://ogp.me/ns/fb#" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- facebook open graph metadata -->
+
+
+    <title>Prime Cinemas</title>
+    <link rel="shortcut icon" href="//www.prime.jo/IT-CDN/Themes/_prime2016/Images/favicon.ico" />
+
+    <link href="//www.prime.jo/IT-CDN/Themes/_prime2016/Css/MasterPage?v=500.1216.0.0" rel="stylesheet" type="text/css" />
+    <link href="//www.prime.jo/IT-CDN/Themes/_prime2016/Css/BrowsingPages?v=500.1216.0.0" rel="stylesheet" type="text/css" />
+
+    <link href="//www.prime.jo/IT-CDN/Themes/_prime2016/Css/MoviesList?v=500.1216.0.0" rel="stylesheet" type="text/css" />
+    <link href="//www.prime.jo/IT-CDN/Themes/_prime2016/Css/Thirdparty/jquery-ui.css?v=500.1216.0.0" rel="stylesheet" type="text/css" />
+
+    <link href="//www.prime.jo/IT-CDN/Themes/_prime2016/Css/Trailers/Controls.css?v=500.1216.0.0" rel="stylesheet" type="text/css" />
+
+
+    <script src="//www.prime.jo/IT-CDN/Scripts/modernizr-2.6.2.min.js?v=500.1216.0.0" type="text/javascript"></script>
+
+    <script src="//www.prime.jo/IT-CDN/Scripts/Vista/Vista.js?v=500.1216.0.0" type="text/javascript"></script>
+
+    <script src="//www.prime.jo/IT-CDN/Scripts/Vista/Polyfill.js?v=500.1216.0.0" type="text/javascript"></script>
+
+
+    <!--[if lte IE 8]>
+        <link href="//www.prime.jo/IT-CDN/Themes/_prime2016/Css/Browsing/IE8.css?v=500.1216.0.0" rel="stylesheet" type="text/css" />
+
+        <link href="//www.prime.jo/IT-CDN/Themes/_prime2016/Css/IE8.css?v=500.1216.0.0" rel="stylesheet" type="text/css" />
+
+    <![endif]-->
+    <!--[if lte IE 7]>
+        <link href="//www.prime.jo/IT-CDN/Themes/_prime2016/Css/Browsing/IE7.css?v=500.1216.0.0" rel="stylesheet" type="text/css" />
+
+        <link href="//www.prime.jo/IT-CDN/Themes/_prime2016/Css/IE7.css?v=500.1216.0.0" rel="stylesheet" type="text/css" />
+
+    <![endif]-->
+    <!--[if IE 6]>
+         <link href="//www.prime.jo/IT-CDN/Themes/_prime2016/Css/InternetExplorer6?v=500.1216.0.0" rel="stylesheet" type="text/css" />
+         <link href="//www.prime.jo/IT-CDN/Themes/_prime2016/Css/Browsing/IE6.css?v=500.1216.0.0" rel="stylesheet" type="text/css" />
+
+    <![endif]-->
+
+</head>
+<body>
+    <header>
+
+
+
+
+
+
+
+<div class="fixed-content-wrapper">
+    <div class="fixed-content" id="main-menu-container">
+        <input class="menu-btn" type="checkbox" id="menu-btn" />
+        <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+        <h1 class="logo">
+            <em>Prime Cinemas</em>
+        </h1>
+
+
+
+<nav id="main-menu">
+    <ul class="nav-first-level">
+            <li id="Home" class=" grid-6-col "><a href="//www.prime.jo/Browsing/" target="_self">Home</a></li>
+            <li id="Movies" class="selected grid-6-col "><a href="//www.prime.jo/Browsing/Movies/NowShowing" target="_self">Movies</a></li>
+            <li id="Cinemas" class=" grid-6-col "><a href="//www.prime.jo/Browsing/Cinemas" target="_self">Cinemas</a></li>
+            <li id="Events" class=" grid-6-col col-span-2"><a href="//www.prime.jo/Browsing/EventsAndExperiences" target="_self">Events &amp; Experiences</a></li>
+            <li id="Loyalty" class=" grid-6-col "><a href="//www.prime.jo/Browsing/Loyalty/Clubs" target="_self">Loyalty</a></li>
+    </ul>
+    <nav class="sub-nav-base">
+            <ul class="sub-nav Home " style="display: none;">
+                <li class="more-nav-parent"><a>More</a> </li>
+            </ul>
+            <ul class="sub-nav Movies selected" style="display: none;">
+                    <li class="Movies sub-selected"><a href="//www.prime.jo/Browsing/Movies/NowShowing" title="Now Selling">Now Selling</a></li>
+                    <li class="Movies "><a href="//www.prime.jo/Browsing/Movies/ComingSoon" title="Coming Soon">Coming Soon</a></li>
+                <li class="more-nav-parent"><a>More</a> </li>
+            </ul>
+            <ul class="sub-nav Cinemas " style="display: none;">
+                <li class="more-nav-parent"><a>More</a> </li>
+            </ul>
+            <ul class="sub-nav Events " style="display: none;">
+                    <li class="Events "><a href="//www.prime.jo/Browsing/EventsAndExperiences/ExperienceDetails/CineBistro" title="Cine Bistro">Cine Bistro</a></li>
+                    <li class="Events "><a href="//www.prime.jo/Browsing/EventsAndExperiences/ExperienceDetails/Diamond" title="Diamond">Diamond</a></li>
+                    <li class="Events "><a href="//www.prime.jo/Browsing/EventsAndExperiences/ExperienceDetails/Plus" title="Plus">Plus</a></li>
+                    <li class="Events "><a href="//www.prime.jo/Browsing/EventsAndExperiences/ExperienceDetails/Star" title="Star">Star</a></li>
+                <li class="more-nav-parent"><a>More</a> </li>
+            </ul>
+            <ul class="sub-nav Loyalty " style="display: none;">
+                <li class="more-nav-parent"><a>More</a> </li>
+            </ul>
+    </nav>
+</nav>
+<ul id="more-nav">
+</ul>
+
+
+    </div>
+</div>
+
+
+    </header>
+
+    <section id="banner">
+
+
+<div id="quick-tickets">
+    <h2>Book Now!</h2>
+
+    <p>Choose your seats and buy your tickets from the comfort of your home.</p>
+
+    <button type="button" value="movie">Pick a<em>Movie</em></button><button type="button" value="cinema">Pick a<em>Cinema</em></button><button type="button" value="type">Pick a<em>Show Type</em></button><button type="button" value="time">Pick a<em>Time</em></button>
+</div>
+
+ <div id="quick-tickets-overlay">
+    <button type="button" class="close"><span>Close</span></button>
+
+    <div id="quick-tickets-details">
+        <h3>Pick<em></em></h3>
+
+        <dl>
+            <dt class="movies">Movies:</dt>
+            <dd></dd>
+            <dt class="cinemas">Cinemas:</dt>
+            <dd></dd>
+            <dt class="types">Show Types:</dt>
+            <dd></dd>
+            <dt class="times">Time:</dt>
+            <dd></dd>
+        </dl>
+
+        <button type="button" class="restart user-action"><span class="icon">Start Again</span></button>
+        <button type="button" class="compare user-action"><span class="icon">Skip to Results</span></button>
+    </div>
+
+    <div id="quick-tickets-selection">
+        <div class="selection"></div>
+
+        <div class="toolbar">
+            <span class="search">
+                <input type="text" placeholder="Search" />
+                <button type="button" class="clear-search"></button>
+            </span>
+            <button type="button" class="clear user-action"><span class="icon">Clear Selection</span></button>
+            <button type="button" class="next"><span class="icon"></span></button>
+        </div>
+    </div>
+</div>
+        <div id="qt-ad" class="generic-image-carousel"></div>
+    </section>
+
+    <section class="content">
+        <article>
+
+
+<script type="text/javascript">
+    Vista.Localisation = {};
+    Vista.Localisation.CloseTrailer = "Close";
+    Vista.Localisation.RateTrailer = "Did you like this trailer?";
+</script>
+<div id="movies" class="now-showing">
+    <h2>
+        <em>Now Selling</em>
+    </h2>
+    <div class="ad-content">
+        <section class="loading main-ad generic-image-carousel"></section>
+        <section class="loading lower-ad generic-image-carousel"></section>
+    </div>
+    <article id="movies-list">
+                <div class="list-item movie ">
+                    <div class="image-outer">
+                        <div style="background-image: url('//www.prime.jo/CDN/media/entity/get/FilmPosterGraphic/h-HO00006101?width=121&amp;height=180&amp;referenceScheme=HeadOffice&amp;allowPlaceHolder=true')">
+                            <img src="//www.prime.jo/CDN/media/entity/get/FilmPosterGraphic/h-HO00006101?width=121&amp;height=180&amp;referenceScheme=HeadOffice&amp;allowPlaceHolder=true" />
+                        </div>
+                    </div>
+                    <div class="item-details">
+                        <div class="item-details-inner">
+                            <div class="title-wrapper">
+<div class="censor-rating">
+                                        <img class="icon" src="//www.prime.jo/CDN/media/entity/get/RatingIconGraphic/TBC?referenceScheme=Global&amp;allowPlaceHolder=true" title="" />
+                                    </div>
+                                <a href="//www.prime.jo/Browsing/Movies/Details/h-HO00006101">
+                                    <h3 class="item-title">
+                                        6 Days: What The Years done to us
+                                    </h3>
+                                </a>
+                            </div>
+                            <p class="blurb subtext">A theatrical performance that raises the contrast between what we think and what we say in the context of love and relationships.</p>
+                        </div>
+                    </div>
+                    <div class="movie-actions">
+                            <div class="social-actions social-media-data">
+<div class="fb-like" data-layout="button_count" data-href="https://www.prime.jo/Browsing/Movies/Details/h-HO00006101" data-send="false" data-show-faces="false" data-width="300"></div>                                                                <input id="MovieId" name="MovieId" type="hidden" value="A000006164" />
+                            </div>
+
+                        <div class="main-action">
+                            <span class="showtimes-book image-wrapper">&nbsp;</span> <a href="//www.prime.jo/Browsing/Movies/Details/h-HO00006101">More Details</a> <span class="right-arrow image-wrapper">&nbsp;</span>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="list-item movie ">
+                    <div class="image-outer">
+                        <div style="background-image: url('//www.prime.jo/CDN/media/entity/get/FilmPosterGraphic/h-HO00006103?width=121&amp;height=180&amp;referenceScheme=HeadOffice&amp;allowPlaceHolder=true')">
+                            <img src="//www.prime.jo/CDN/media/entity/get/FilmPosterGraphic/h-HO00006103?width=121&amp;height=180&amp;referenceScheme=HeadOffice&amp;allowPlaceHolder=true" />
+                        </div>
+                    </div>
+                    <div class="item-details">
+                        <div class="item-details-inner">
+                            <div class="title-wrapper">
+<div class="censor-rating">
+                                        <img class="icon" src="//www.prime.jo/CDN/media/entity/get/RatingIconGraphic/TBC?referenceScheme=Global&amp;allowPlaceHolder=true" title="" />
+                                    </div>
+                                <a href="//www.prime.jo/Browsing/Movies/Details/h-HO00006103">
+                                    <h3 class="item-title">
+                                        Alarum
+                                    </h3>
+                                </a>
+                            </div>
+                            <p class="blurb subtext">Two rogue spies go off-grid, marry, and come under attack at their remote cabin hideaway by various intel agencies seeking a stolen hard drive.</p>
+                        </div>
+                    </div>
+                    <div class="movie-actions">
+                            <div class="social-actions social-media-data">
+<div class="fb-like" data-layout="button_count" data-href="https://www.prime.jo/Browsing/Movies/Details/h-HO00006103" data-send="false" data-show-faces="false" data-width="300"></div>                                                                <input id="MovieId" name="MovieId" type="hidden" value="A000006166" />
+                            </div>
+
+                        <div class="main-action">
+                            <span class="showtimes-book image-wrapper">&nbsp;</span> <a href="//www.prime.jo/Browsing/Movies/Details/h-HO00006103">More Details</a> <span class="right-arrow image-wrapper">&nbsp;</span>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="list-item movie ">
+                    <div class="image-outer">
+                        <div style="background-image: url('//www.prime.jo/CDN/media/entity/get/FilmPosterGraphic/h-HO00006073?width=121&amp;height=180&amp;referenceScheme=HeadOffice&amp;allowPlaceHolder=true')">
+                            <img src="//www.prime.jo/CDN/media/entity/get/FilmPosterGraphic/h-HO00006073?width=121&amp;height=180&amp;referenceScheme=HeadOffice&amp;allowPlaceHolder=true" />
+                        </div>
+                    </div>
+                    <div class="item-details">
+                        <div class="item-details-inner">
+                            <div class="title-wrapper">
+<div class="censor-rating">
+                                        <img class="icon" src="//www.prime.jo/CDN/media/entity/get/RatingIconGraphic/15+?referenceScheme=Global&amp;allowPlaceHolder=true" title="" />
+                                    </div>
+                                <a href="//www.prime.jo/Browsing/Movies/Details/h-HO00006073">
+                                    <h3 class="item-title">
+                                        Badaa Saat Fi Yawman Ma
+                                    </h3>
+                                </a>
+                            </div>
+                            <p class="blurb subtext">The work takes place over a short period of time, not exceeding a few hours, through a group of characters who interconnect, stories intertwined between them, and love that brings them together.</p>
+                        </div>
+                    </div>
+                    <div class="movie-actions">
+                            <div class="social-actions social-media-data">
+<div class="fb-like" data-layout="button_count" data-href="https://www.prime.jo/Browsing/Movies/Details/h-HO00006073" data-send="false" data-show-faces="false" data-width="300"></div>                                                                <input id="MovieId" name="MovieId" type="hidden" value="A000006135" />
+                            </div>
+
+                        <div class="main-action">
+                            <span class="showtimes-book image-wrapper">&nbsp;</span> <a href="//www.prime.jo/Browsing/Movies/Details/h-HO00006073">More Details</a> <span class="right-arrow image-wrapper">&nbsp;</span>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="list-item movie ">
+                    <div class="image-outer">
+                        <div style="background-image: url('//www.prime.jo/CDN/media/entity/get/FilmPosterGraphic/h-HO00006100?width=121&amp;height=180&amp;referenceScheme=HeadOffice&amp;allowPlaceHolder=true')">
+                            <img src="//www.prime.jo/CDN/media/entity/get/FilmPosterGraphic/h-HO00006100?width=121&amp;height=180&amp;referenceScheme=HeadOffice&amp;allowPlaceHolder=true" />
+                        </div>
+                    </div>
+                    <div class="item-details">
+                        <div class="item-details-inner">
+                            <div class="title-wrapper">
+<div class="censor-rating">
+                                        <img class="icon" src="//www.prime.jo/CDN/media/entity/get/RatingIconGraphic/R18?referenceScheme=Global&amp;allowPlaceHolder=true" title="" />
+                                    </div>
+                                <a href="//www.prime.jo/Browsing/Movies/Details/h-HO00006100">
+                                    <h3 class="item-title">
+                                        Bridget Jones: Mad About the Boy
+                                    </h3>
+                                </a>
+                            </div>
+                            <p class="blurb subtext">Bridget Jones navigates life as a widow and single mom with the help of her family, friends, and former lover, Daniel. Back to work and on the apps, she's pursued by a younger man and maybe - just maybe - her son's science teacher.</p>
+                        </div>
+                    </div>
+                    <div class="movie-actions">
+                            <div class="social-actions social-media-data">
+<div class="fb-like" data-layout="button_count" data-href="https://www.prime.jo/Browsing/Movies/Details/h-HO00006100" data-send="false" data-show-faces="false" data-width="300"></div>                                                                <input id="MovieId" name="MovieId" type="hidden" value="A000006163" />
+                            </div>
+
+                        <div class="main-action">
+                            <span class="showtimes-book image-wrapper">&nbsp;</span> <a href="//www.prime.jo/Browsing/Movies/Details/h-HO00006100">More Details</a> <span class="right-arrow image-wrapper">&nbsp;</span>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="list-item movie ">
+                    <div class="image-outer">
+                        <div style="background-image: url('//www.prime.jo/CDN/media/entity/get/FilmPosterGraphic/h-HO00006071?width=121&amp;height=180&amp;referenceScheme=HeadOffice&amp;allowPlaceHolder=true')">
+                            <img src="//www.prime.jo/CDN/media/entity/get/FilmPosterGraphic/h-HO00006071?width=121&amp;height=180&amp;referenceScheme=HeadOffice&amp;allowPlaceHolder=true" />
+                        </div>
+                            <a class="play" href="https://www.imdb.com/video/vi1185794329/?playlistId=tt14513804&amp;ref_=tt_ov_ov_vi" data-movie-id="h-HO00006071" data-film-ho-code="A000006133"><div class="overlay">&nbsp;</div><span>Play Trailer</span></a>
+                    </div>
+                    <div class="item-details">
+                        <div class="item-details-inner">
+                            <div class="title-wrapper">
+<div class="censor-rating">
+                                        <img class="icon" src="//www.prime.jo/CDN/media/entity/get/RatingIconGraphic/TBC?referenceScheme=Global&amp;allowPlaceHolder=true" title="" />
+                                    </div>
+                                <a href="//www.prime.jo/Browsing/Movies/Details/h-HO00006071">
+                                    <h3 class="item-title">
+                                        Captain America: Brave New World
+                                    </h3>
+                                </a>
+                            </div>
+                            <p class="blurb subtext">Sam Wilson, the new Captain America, finds himself in the middle of an international incident and must discover the motive behind a nefarious global plan.</p>
+                        </div>
+                    </div>
+                    <div class="movie-actions">
+                            <div class="social-actions social-media-data">
+<div class="fb-like" data-layout="button_count" data-href="https://www.prime.jo/Browsing/Movies/Details/h-HO00006071" data-send="false" data-show-faces="false" data-width="300"></div>                                                                <input id="MovieId" name="MovieId" type="hidden" value="A000006133" />
+                            </div>
+
+                        <div class="main-action">
+                            <span class="showtimes-book image-wrapper">&nbsp;</span> <a href="//www.prime.jo/Browsing/Movies/Details/h-HO00006071">More Details</a> <span class="right-arrow image-wrapper">&nbsp;</span>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="list-item movie ">
+                    <div class="image-outer">
+                        <div style="background-image: url('//www.prime.jo/CDN/media/entity/get/FilmPosterGraphic/h-HO00006088?width=121&amp;height=180&amp;referenceScheme=HeadOffice&amp;allowPlaceHolder=true')">
+                            <img src="//www.prime.jo/CDN/media/entity/get/FilmPosterGraphic/h-HO00006088?width=121&amp;height=180&amp;referenceScheme=HeadOffice&amp;allowPlaceHolder=true" />
+                        </div>
+                    </div>
+                    <div class="item-details">
+                        <div class="item-details-inner">
+                            <div class="title-wrapper">
+<div class="censor-rating">
+                                        <img class="icon" src="//www.prime.jo/CDN/media/entity/get/RatingIconGraphic/PG?referenceScheme=Global&amp;allowPlaceHolder=true" title="" />
+                                    </div>
+                                <a href="//www.prime.jo/Browsing/Movies/Details/h-HO00006088">
+                                    <h3 class="item-title">
+                                        Dog Man
+                                    </h3>
+                                </a>
+                            </div>
+                            <p class="blurb subtext">Dog Man, half dog and half man, he is sworn to protect and serve as he doggedly pursues the feline supervillain Petey the Cat.</p>
+                        </div>
+                    </div>
+                    <div class="movie-actions">
+                            <div class="social-actions social-media-data">
+<div class="fb-like" data-layout="button_count" data-href="https://www.prime.jo/Browsing/Movies/Details/h-HO00006088" data-send="false" data-show-faces="false" data-width="300"></div>                                                                <input id="MovieId" name="MovieId" type="hidden" value="A000006151" />
+                            </div>
+
+                        <div class="main-action">
+                            <span class="showtimes-book image-wrapper">&nbsp;</span> <a href="//www.prime.jo/Browsing/Movies/Details/h-HO00006088">More Details</a> <span class="right-arrow image-wrapper">&nbsp;</span>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="list-item movie ">
+                    <div class="image-outer">
+                        <div style="background-image: url('//www.prime.jo/CDN/media/entity/get/FilmPosterGraphic/h-HO00006087?width=121&amp;height=180&amp;referenceScheme=HeadOffice&amp;allowPlaceHolder=true')">
+                            <img src="//www.prime.jo/CDN/media/entity/get/FilmPosterGraphic/h-HO00006087?width=121&amp;height=180&amp;referenceScheme=HeadOffice&amp;allowPlaceHolder=true" />
+                        </div>
+                    </div>
+                    <div class="item-details">
+                        <div class="item-details-inner">
+                            <div class="title-wrapper">
+<div class="censor-rating">
+                                        <img class="icon" src="//www.prime.jo/CDN/media/entity/get/RatingIconGraphic/15+?referenceScheme=Global&amp;allowPlaceHolder=true" title="" />
+                                    </div>
+                                <a href="//www.prime.jo/Browsing/Movies/Details/h-HO00006087">
+                                    <h3 class="item-title">
+                                        El Dashash
+                                    </h3>
+                                </a>
+                            </div>
+                            <p class="blurb subtext">It follows El Dashash, who owns a nightclub and deals with many enemies all the time, but when he is exposed to a crisis that turns his life upside down, he seeks to transform into a better man.</p>
+                        </div>
+                    </div>
+                    <div class="movie-actions">
+                            <div class="social-actions social-media-data">
+<div class="fb-like" data-layout="button_count" data-href="https://www.prime.jo/Browsing/Movies/Details/h-HO00006087" data-send="false" data-show-faces="false" data-width="300"></div>                                                                <input id="MovieId" name="MovieId" type="hidden" value="A000006150" />
+                            </div>
+
+                        <div class="main-action">
+                            <span class="showtimes-book image-wrapper">&nbsp;</span> <a href="//www.prime.jo/Browsing/Movies/Details/h-HO00006087">More Details</a> <span class="right-arrow image-wrapper">&nbsp;</span>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="list-item movie ">
+                    <div class="image-outer">
+                        <div style="background-image: url('//www.prime.jo/CDN/media/entity/get/FilmPosterGraphic/h-HO00006044?width=121&amp;height=180&amp;referenceScheme=HeadOffice&amp;allowPlaceHolder=true')">
+                            <img src="//www.prime.jo/CDN/media/entity/get/FilmPosterGraphic/h-HO00006044?width=121&amp;height=180&amp;referenceScheme=HeadOffice&amp;allowPlaceHolder=true" />
+                        </div>
+                            <a class="play" href="https://youtu.be/mQf-jfPFiYI" data-movie-id="h-HO00006044" data-film-ho-code="A000006105"><div class="overlay">&nbsp;</div><span>Play Trailer</span></a>
+                    </div>
+                    <div class="item-details">
+                        <div class="item-details-inner">
+                            <div class="title-wrapper">
+<div class="censor-rating">
+                                        <img class="icon" src="//www.prime.jo/CDN/media/entity/get/RatingIconGraphic/TBC?referenceScheme=Global&amp;allowPlaceHolder=true" title="" />
+                                    </div>
+                                <a href="//www.prime.jo/Browsing/Movies/Details/h-HO00006044">
+                                    <h3 class="item-title">
+                                        El Hana El Ana Feeh
+                                    </h3>
+                                </a>
+                            </div>
+                            <p class="blurb subtext">Ahmed, a quirky marriage counselor, is heartbroken when his wife, Eman, receives bad news from her doctor. To make sure their daughter has a loving mother figure after she’s gone, Eman forces Ahmed to marry her attractive best friend Fawzeya, despite knowing he’s always had a crush on her! As Ahmed and Fawzeya start to warm up to each other after their marriage, hilarious events unfold when they discover a mistake in Eman’s diagnosis.
+•	أحمد، مستشار زواج غريب الأطوار، تأتيه الصدمة الشديدة عندما تتلقى زوجته إيمان أخباراً سيئة من طبيبها. ولتطمئن إيمان على زوجها وابنتها بعد رحيلها، تجبر أحمد على الزواج من صديقتها الجذابة فوزية، رغم معرفتها أنه كان دائماً معجباً بها! وبينما يبدأ أحمد وفوزية في التودد لبعضهما بعد زواجهما، تتوالى احداث مضحكة ومواقف هزلية عندما يكتشفون وجود خطأ في تشخيص إيمان.
+</p>
+                        </div>
+                    </div>
+                    <div class="movie-actions">
+                            <div class="social-actions social-media-data">
+<div class="fb-like" data-layout="button_count" data-href="https://www.prime.jo/Browsing/Movies/Details/h-HO00006044" data-send="false" data-show-faces="false" data-width="300"></div>                                                                <input id="MovieId" name="MovieId" type="hidden" value="A000006105" />
+                            </div>
+
+                        <div class="main-action">
+                            <span class="showtimes-book image-wrapper">&nbsp;</span> <a href="//www.prime.jo/Browsing/Movies/Details/h-HO00006044">More Details</a> <span class="right-arrow image-wrapper">&nbsp;</span>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="list-item movie ">
+                    <div class="image-outer">
+                        <div style="background-image: url('//www.prime.jo/CDN/media/entity/get/FilmPosterGraphic/h-HO00006068?width=121&amp;height=180&amp;referenceScheme=HeadOffice&amp;allowPlaceHolder=true')">
+                            <img src="//www.prime.jo/CDN/media/entity/get/FilmPosterGraphic/h-HO00006068?width=121&amp;height=180&amp;referenceScheme=HeadOffice&amp;allowPlaceHolder=true" />
+                        </div>
+                            <a class="play" href="https://www.imdb.com/video/vi2703410713/?playlistId=tt10078772&amp;ref_=tt_ov_ov_vi" data-movie-id="h-HO00006068" data-film-ho-code="A000006130"><div class="overlay">&nbsp;</div><span>Play Trailer</span></a>
+                    </div>
+                    <div class="item-details">
+                        <div class="item-details-inner">
+                            <div class="title-wrapper">
+<div class="censor-rating">
+                                        <img class="icon" src="//www.prime.jo/CDN/media/entity/get/RatingIconGraphic/18?referenceScheme=Global&amp;allowPlaceHolder=true" title="" />
+                                    </div>
+                                <a href="//www.prime.jo/Browsing/Movies/Details/h-HO00006068">
+                                    <h3 class="item-title">
+                                        Flight Risk
+                                    </h3>
+                                </a>
+                            </div>
+                            <p class="blurb subtext">A pilot transports an Air Marshal accompanying a fugitive to trial. As they cross the Alaskan wilderness, tensions soar and trust is tested, as not everyone on board is who they seem.</p>
+                        </div>
+                    </div>
+                    <div class="movie-actions">
+                            <div class="social-actions social-media-data">
+<div class="fb-like" data-layout="button_count" data-href="https://www.prime.jo/Browsing/Movies/Details/h-HO00006068" data-send="false" data-show-faces="false" data-width="300"></div>                                                                <input id="MovieId" name="MovieId" type="hidden" value="A000006130" />
+                            </div>
+
+                        <div class="main-action">
+                            <span class="showtimes-book image-wrapper">&nbsp;</span> <a href="//www.prime.jo/Browsing/Movies/Details/h-HO00006068">More Details</a> <span class="right-arrow image-wrapper">&nbsp;</span>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="list-item movie ">
+                    <div class="image-outer">
+                        <div style="background-image: url('//www.prime.jo/CDN/media/entity/get/FilmPosterGraphic/h-HO00006113?width=121&amp;height=180&amp;referenceScheme=HeadOffice&amp;allowPlaceHolder=true')">
+                            <img src="//www.prime.jo/CDN/media/entity/get/FilmPosterGraphic/h-HO00006113?width=121&amp;height=180&amp;referenceScheme=HeadOffice&amp;allowPlaceHolder=true" />
+                        </div>
+                    </div>
+                    <div class="item-details">
+                        <div class="item-details-inner">
+                            <div class="title-wrapper">
+<div class="censor-rating">
+                                        <img class="icon" src="//www.prime.jo/CDN/media/entity/get/RatingIconGraphic/G?referenceScheme=Global&amp;allowPlaceHolder=true" title="" />
+                                    </div>
+                                <a href="//www.prime.jo/Browsing/Movies/Details/h-HO00006113">
+                                    <h3 class="item-title">
+                                        Jordan Vs South Korea
+                                    </h3>
+                                </a>
+                            </div>
+                            <p class="blurb subtext">WCP</p>
+                        </div>
+                    </div>
+                    <div class="movie-actions">
+                            <div class="social-actions social-media-data">
+<div class="fb-like" data-layout="button_count" data-href="https://www.prime.jo/Browsing/Movies/Details/h-HO00006113" data-send="false" data-show-faces="false" data-width="300"></div>                                                                <input id="MovieId" name="MovieId" type="hidden" value="A000006176" />
+                            </div>
+
+                        <div class="main-action">
+                            <span class="showtimes-book image-wrapper">&nbsp;</span> <a href="//www.prime.jo/Browsing/Movies/Details/h-HO00006113">More Details</a> <span class="right-arrow image-wrapper">&nbsp;</span>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="list-item movie ">
+                    <div class="image-outer">
+                        <div style="background-image: url('//www.prime.jo/CDN/media/entity/get/FilmPosterGraphic/h-HO00006095?width=121&amp;height=180&amp;referenceScheme=HeadOffice&amp;allowPlaceHolder=true')">
+                            <img src="//www.prime.jo/CDN/media/entity/get/FilmPosterGraphic/h-HO00006095?width=121&amp;height=180&amp;referenceScheme=HeadOffice&amp;allowPlaceHolder=true" />
+                        </div>
+                    </div>
+                    <div class="item-details">
+                        <div class="item-details-inner">
+                            <div class="title-wrapper">
+<div class="censor-rating">
+                                        <img class="icon" src="//www.prime.jo/CDN/media/entity/get/RatingIconGraphic/TBC?referenceScheme=Global&amp;allowPlaceHolder=true" title="" />
+                                    </div>
+                                <a href="//www.prime.jo/Browsing/Movies/Details/h-HO00006095">
+                                    <h3 class="item-title">
+                                        Love Hurts
+                                    </h3>
+                                </a>
+                            </div>
+                            <p class="blurb subtext">A realtor is pulled back into the life he left behind after his former partner-in-crime resurfaces with an ominous message. With his crime-lord brother also on his trail, he must confront his past and the history he never fully buried.</p>
+                        </div>
+                    </div>
+                    <div class="movie-actions">
+                            <div class="social-actions social-media-data">
+<div class="fb-like" data-layout="button_count" data-href="https://www.prime.jo/Browsing/Movies/Details/h-HO00006095" data-send="false" data-show-faces="false" data-width="300"></div>                                                                <input id="MovieId" name="MovieId" type="hidden" value="A000006158" />
+                            </div>
+
+                        <div class="main-action">
+                            <span class="showtimes-book image-wrapper">&nbsp;</span> <a href="//www.prime.jo/Browsing/Movies/Details/h-HO00006095">More Details</a> <span class="right-arrow image-wrapper">&nbsp;</span>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="list-item movie ">
+                    <div class="image-outer">
+                        <div style="background-image: url('//www.prime.jo/CDN/media/entity/get/FilmPosterGraphic/h-HO00006053?width=121&amp;height=180&amp;referenceScheme=HeadOffice&amp;allowPlaceHolder=true')">
+                            <img src="//www.prime.jo/CDN/media/entity/get/FilmPosterGraphic/h-HO00006053?width=121&amp;height=180&amp;referenceScheme=HeadOffice&amp;allowPlaceHolder=true" />
+                        </div>
+                    </div>
+                    <div class="item-details">
+                        <div class="item-details-inner">
+                            <div class="title-wrapper">
+<div class="censor-rating">
+                                        <img class="icon" src="//www.prime.jo/CDN/media/entity/get/RatingIconGraphic/PG?referenceScheme=Global&amp;allowPlaceHolder=true" title="" />
+                                    </div>
+                                <a href="//www.prime.jo/Browsing/Movies/Details/h-HO00006053">
+                                    <h3 class="item-title">
+                                        Moana 2
+                                    </h3>
+                                </a>
+                            </div>
+                            <p class="blurb subtext">After receiving an unexpected call from her wayfinding ancestors, Moana must journey to the far seas of Oceania and into dangerous, long-lost waters for an adventure unlike anything she's ever faced.</p>
+                        </div>
+                    </div>
+                    <div class="movie-actions">
+                            <div class="social-actions social-media-data">
+<div class="fb-like" data-layout="button_count" data-href="https://www.prime.jo/Browsing/Movies/Details/h-HO00006053" data-send="false" data-show-faces="false" data-width="300"></div>                                                                <input id="MovieId" name="MovieId" type="hidden" value="A000006114" />
+                            </div>
+
+                        <div class="main-action">
+                            <span class="showtimes-book image-wrapper">&nbsp;</span> <a href="//www.prime.jo/Browsing/Movies/Details/h-HO00006053">More Details</a> <span class="right-arrow image-wrapper">&nbsp;</span>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="list-item movie ">
+                    <div class="image-outer">
+                        <div style="background-image: url('//www.prime.jo/CDN/media/entity/get/FilmPosterGraphic/h-HO00006086?width=121&amp;height=180&amp;referenceScheme=HeadOffice&amp;allowPlaceHolder=true')">
+                            <img src="//www.prime.jo/CDN/media/entity/get/FilmPosterGraphic/h-HO00006086?width=121&amp;height=180&amp;referenceScheme=HeadOffice&amp;allowPlaceHolder=true" />
+                        </div>
+                    </div>
+                    <div class="item-details">
+                        <div class="item-details-inner">
+                            <div class="title-wrapper">
+<div class="censor-rating">
+                                        <img class="icon" src="//www.prime.jo/CDN/media/entity/get/RatingIconGraphic/TBC?referenceScheme=Global&amp;allowPlaceHolder=true" title="" />
+                                    </div>
+                                <a href="//www.prime.jo/Browsing/Movies/Details/h-HO00006086">
+                                    <h3 class="item-title">
+                                        MR AZNAVOUR
+                                    </h3>
+                                </a>
+                            </div>
+                            <p class="blurb subtext">Follows the beginnings of the iconic French-Armenian singer, songwriter and actor, Charles Aznavour, from zero to fame.</p>
+                        </div>
+                    </div>
+                    <div class="movie-actions">
+                            <div class="social-actions social-media-data">
+<div class="fb-like" data-layout="button_count" data-href="https://www.prime.jo/Browsing/Movies/Details/h-HO00006086" data-send="false" data-show-faces="false" data-width="300"></div>                                                                <input id="MovieId" name="MovieId" type="hidden" value="A000006149" />
+                            </div>
+
+                        <div class="main-action">
+                            <span class="showtimes-book image-wrapper">&nbsp;</span> <a href="//www.prime.jo/Browsing/Movies/Details/h-HO00006086">More Details</a> <span class="right-arrow image-wrapper">&nbsp;</span>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="list-item movie ">
+                    <div class="image-outer">
+                        <div style="background-image: url('//www.prime.jo/CDN/media/entity/get/FilmPosterGraphic/h-HO00006033?width=121&amp;height=180&amp;referenceScheme=HeadOffice&amp;allowPlaceHolder=true')">
+                            <img src="//www.prime.jo/CDN/media/entity/get/FilmPosterGraphic/h-HO00006033?width=121&amp;height=180&amp;referenceScheme=HeadOffice&amp;allowPlaceHolder=true" />
+                        </div>
+                            <a class="play" href="https://www.imdb.com/video/vi3373057561/?playlistId=tt13186482&amp;ref_=tt_ov_vi" data-movie-id="h-HO00006033" data-film-ho-code="A000006091"><div class="overlay">&nbsp;</div><span>Play Trailer</span></a>
+                    </div>
+                    <div class="item-details">
+                        <div class="item-details-inner">
+                            <div class="title-wrapper">
+<div class="censor-rating">
+                                        <img class="icon" src="//www.prime.jo/CDN/media/entity/get/RatingIconGraphic/PG?referenceScheme=Global&amp;allowPlaceHolder=true" title="" />
+                                    </div>
+                                <a href="//www.prime.jo/Browsing/Movies/Details/h-HO00006033">
+                                    <h3 class="item-title">
+                                        Mufasa: The Lion King
+                                    </h3>
+                                </a>
+                            </div>
+                            <p class="blurb subtext">Simba, having become king of the Pride Lands, is determined for his cub to follow in his paw prints while the origins of his late father Mufasa are explored.</p>
+                        </div>
+                    </div>
+                    <div class="movie-actions">
+                            <div class="social-actions social-media-data">
+<div class="fb-like" data-layout="button_count" data-href="https://www.prime.jo/Browsing/Movies/Details/h-HO00006033" data-send="false" data-show-faces="false" data-width="300"></div>                                                                <input id="MovieId" name="MovieId" type="hidden" value="A000006091" />
+                            </div>
+
+                        <div class="main-action">
+                            <span class="showtimes-book image-wrapper">&nbsp;</span> <a href="//www.prime.jo/Browsing/Movies/Details/h-HO00006033">More Details</a> <span class="right-arrow image-wrapper">&nbsp;</span>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="list-item movie ">
+                    <div class="image-outer">
+                        <div style="background-image: url('//www.prime.jo/CDN/media/entity/get/FilmPosterGraphic/h-HO00006104?width=121&amp;height=180&amp;referenceScheme=HeadOffice&amp;allowPlaceHolder=true')">
+                            <img src="//www.prime.jo/CDN/media/entity/get/FilmPosterGraphic/h-HO00006104?width=121&amp;height=180&amp;referenceScheme=HeadOffice&amp;allowPlaceHolder=true" />
+                        </div>
+                    </div>
+                    <div class="item-details">
+                        <div class="item-details-inner">
+                            <div class="title-wrapper">
+<div class="censor-rating">
+                                        <img class="icon" src="//www.prime.jo/CDN/media/entity/get/RatingIconGraphic/TBC?referenceScheme=Global&amp;allowPlaceHolder=true" title="" />
+                                    </div>
+                                <a href="//www.prime.jo/Browsing/Movies/Details/h-HO00006104">
+                                    <h3 class="item-title">
+                                        Outbreak
+                                    </h3>
+                                </a>
+                            </div>
+                            <p class="blurb subtext">A Psychological Thriller about a state park ranger husband and his wife struggling to come to terms with their missing teenage son while dealing with a local mystery that questions their relationship and in the end, their grip on reality.</p>
+                        </div>
+                    </div>
+                    <div class="movie-actions">
+                            <div class="social-actions social-media-data">
+<div class="fb-like" data-layout="button_count" data-href="https://www.prime.jo/Browsing/Movies/Details/h-HO00006104" data-send="false" data-show-faces="false" data-width="300"></div>                                                                <input id="MovieId" name="MovieId" type="hidden" value="A000006167" />
+                            </div>
+
+                        <div class="main-action">
+                            <span class="showtimes-book image-wrapper">&nbsp;</span> <a href="//www.prime.jo/Browsing/Movies/Details/h-HO00006104">More Details</a> <span class="right-arrow image-wrapper">&nbsp;</span>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="list-item movie ">
+                    <div class="image-outer">
+                        <div style="background-image: url('//www.prime.jo/CDN/media/entity/get/FilmPosterGraphic/h-HO00006067?width=121&amp;height=180&amp;referenceScheme=HeadOffice&amp;allowPlaceHolder=true')">
+                            <img src="//www.prime.jo/CDN/media/entity/get/FilmPosterGraphic/h-HO00006067?width=121&amp;height=180&amp;referenceScheme=HeadOffice&amp;allowPlaceHolder=true" />
+                        </div>
+                            <a class="play" href="https://www.imdb.com/video/vi1805633817/?playlistId=tt18259086&amp;ref_=tt_ov_ov_vi" data-movie-id="h-HO00006067" data-film-ho-code="A000006129"><div class="overlay">&nbsp;</div><span>Play Trailer</span></a>
+                    </div>
+                    <div class="item-details">
+                        <div class="item-details-inner">
+                            <div class="title-wrapper">
+<div class="censor-rating">
+                                        <img class="icon" src="//www.prime.jo/CDN/media/entity/get/RatingIconGraphic/TBC?referenceScheme=Global&amp;allowPlaceHolder=true" title="" />
+                                    </div>
+                                <a href="//www.prime.jo/Browsing/Movies/Details/h-HO00006067">
+                                    <h3 class="item-title">
+                                        Sonic the Hedgehog 3
+                                    </h3>
+                                </a>
+                            </div>
+                            <p class="blurb subtext">Sonic, Knuckles, and Tails reunite against a powerful new adversary, Shadow, a mysterious villain with powers unlike anything they have faced before. With their abilities outmatched, Team Sonic must seek out an unlikely alliance.</p>
+                        </div>
+                    </div>
+                    <div class="movie-actions">
+                            <div class="social-actions social-media-data">
+<div class="fb-like" data-layout="button_count" data-href="https://www.prime.jo/Browsing/Movies/Details/h-HO00006067" data-send="false" data-show-faces="false" data-width="300"></div>                                                                <input id="MovieId" name="MovieId" type="hidden" value="A000006129" />
+                            </div>
+
+                        <div class="main-action">
+                            <span class="showtimes-book image-wrapper">&nbsp;</span> <a href="//www.prime.jo/Browsing/Movies/Details/h-HO00006067">More Details</a> <span class="right-arrow image-wrapper">&nbsp;</span>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="list-item movie last">
+                    <div class="image-outer">
+                        <div style="background-image: url('//www.prime.jo/CDN/media/entity/get/FilmPosterGraphic/h-HO00006102?width=121&amp;height=180&amp;referenceScheme=HeadOffice&amp;allowPlaceHolder=true')">
+                            <img src="//www.prime.jo/CDN/media/entity/get/FilmPosterGraphic/h-HO00006102?width=121&amp;height=180&amp;referenceScheme=HeadOffice&amp;allowPlaceHolder=true" />
+                        </div>
+                    </div>
+                    <div class="item-details">
+                        <div class="item-details-inner">
+                            <div class="title-wrapper">
+<div class="censor-rating">
+                                        <img class="icon" src="//www.prime.jo/CDN/media/entity/get/RatingIconGraphic/TBC?referenceScheme=Global&amp;allowPlaceHolder=true" title="" />
+                                    </div>
+                                <a href="//www.prime.jo/Browsing/Movies/Details/h-HO00006102">
+                                    <h3 class="item-title">
+                                        William Tell
+                                    </h3>
+                                </a>
+                            </div>
+                            <p class="blurb subtext">The narrative unfolds in the 14th Century amidst the days of the Holy Roman Empire where Europe's nations fiercely vie for supremacy and the ambitious Austrians, desiring more land, encroach upon Switzerland, a serene and pastoral nation.</p>
+                        </div>
+                    </div>
+                    <div class="movie-actions">
+                            <div class="social-actions social-media-data">
+<div class="fb-like" data-layout="button_count" data-href="https://www.prime.jo/Browsing/Movies/Details/h-HO00006102" data-send="false" data-show-faces="false" data-width="300"></div>                                                                <input id="MovieId" name="MovieId" type="hidden" value="A000006165" />
+                            </div>
+
+                        <div class="main-action">
+                            <span class="showtimes-book image-wrapper">&nbsp;</span> <a href="//www.prime.jo/Browsing/Movies/Details/h-HO00006102">More Details</a> <span class="right-arrow image-wrapper">&nbsp;</span>
+                        </div>
+
+
+                    </div>
+                </div>
+    </article>
+</div>
+<script src="https://www.youtube.com/iframe_api"></script>
+<div id="trailer-player-template" style="display: none;">
+    <div>
+        <div class="player-container">
+            <div class="player"></div>
+            <div class="playback-controls">
+                <embed class="polyv" allowfullscreen="true" allowscriptaccess="always" flashvars="vid=02bfeb00e2ba940698c54cdf517aa9b6_0" height="390" width="640" name="" src="http://player.polyv.net/videos/player.swf?autoplay=true" type="application/x-shockwave-flash" wmode="Transparent">
+                <div>
+                    <button class="play-button play"></button>
+                    <div class="slider-container"><div class="slider"></div></div>
+                </div>
+            </div>
+            <div class ="overlay"></div>
+        </div>
+    </div>
+</div>
+
+
+
+        </article>
+    </section>
+
+    <footer>
+
+<section id="footer">
+    <div id="footer-inner">
+        <div class="col-3">
+            <div class="col col-left">
+                <div class="col-inner">
+                    <a href="//www.prime.jo/Browsing/">Home</a>
+                </div>
+                <div class="col-inner">
+                    <a href="//www.prime.jo/Browsing/Movies/NowShowing">Now Selling</a>
+                </div>
+                <div class="col-inner">
+                    <a href="//www.prime.jo/Browsing/Movies/ComingSoon">Coming Soon</a>
+                </div>
+            </div>
+            <div class="col col-middle">
+                <div class="col-inner">
+                    <a href="//www.prime.jo/Browsing/Cinemas">Cinemas</a>
+                </div>
+                    <div class="col-inner">
+                        <a href="//www.prime.jo/Browsing/EventsAndExperiences">Events &amp; Experiences</a>
+                    </div>
+                                         <div class="col-inner">
+                            <a href="//www.prime.jo/Browsing/Loyalty/Clubs">Loyalty</a>
+                        </div>
+            </div>
+            <div class="col col-right">
+                                <div class="col-inner">
+                    <a href="//www.prime.jo/Browsing/General/Ratings">Ratings</a>
+                </div>
+                <div class="col-inner">
+                    <a href="//www.prime.jo/Browsing/General/GeneralEnquiries">Contact Us</a>
+                </div>
+            </div>
+        </div>
+        <div id="terms-conditions">
+            <div class="link terms">
+                <a href="//www.prime.jo/Browsing/General/TermsAndConditions">
+                    Terms and Conditions
+                </a>
+            </div>
+            <div class="spacer">&nbsp;</div>
+            <div class="link privacy">
+                <a href="//www.prime.jo/Browsing/General/Privacy">
+                    Privacy
+                </a>
+            </div>
+            <div class="copyright">
+                Copyright 2013 Vista Entertainment Solutions Ltd
+            </div>
+        </div>
+    </div>
+</section>
+    </footer>
+
+
+
+    <script src="//www.prime.jo/IT-CDN/JsBundle/JQueryCommon?v=500.1216.0.0" type="text/javascript"></script>
+
+    <script src="//www.prime.jo/IT-CDN/Scripts/Culture/globalize.js?v=500.1216.0.0" type="text/javascript"></script>
+
+    <script src="//www.prime.jo/IT-CDN/Scripts/Culture/Cultures/globalize.culture.en-US.js?v=500.1216.0.0" type="text/javascript"></script>
+
+    <script type="text/javascript">
+            Globalize.culture('en-US');
+            var currentCulture = Globalize.culture();
+            currentCulture.numberFormat.currency.symbol = 'JOD';
+            currentCulture.numberFormat.currency.decimalSeparator = '.';
+            currentCulture.numberFormat.currency.decimalDigits = 2;
+            currentCulture.numberFormat.currency.groupSeparator = ',';
+
+            Vista.Urls.Shared = {};
+            Vista.Urls.Shared.Home = '//www.prime.jo/Browsing/';
+            Vista.Urls.CDN = {};
+            Vista.Urls.CDN.GetImageData = '//www.prime.jo/CDN/ImageAPI/GetGalleryImageData?galleryName={0}&folderName={1}&preferredWidth={2}&preferredHeight={3}';
+            Vista.Urls.CDN.GalleryImage = '//www.prime.jo/CDN/Image/GalleryImage?galleryName={0}&id={1}&fileName={2}&width={3}&height={4}';
+            Vista.Urls.Ads = {};
+            Vista.Urls.Ads.GetAdData = '//www.prime.jo/IT-CDN/ImageAPI/Advertisement?pageName={0}&sectionName={1}';
+            Vista.Urls.Movies = {};
+            Vista.Urls.Movies.GetMovieFutureSessions = '/Browsing/Movies/GetMovieFutureSessions';
+
+
+            Vista.Lang.Shared = {};
+            Vista.Lang.Shared.OverflowPlaceholder = "... [{0} more]";
+
+
+            Vista.Lang.ModalError = {};
+            Vista.Lang.ModalError.Title = "Whoops!";
+            Vista.Lang.ModalError.OkButton = "OK";
+
+            Vista.Lang.Address = {};
+            Vista.Lang.Address.NoResult = "No results found";
+            Vista.Lang.Address.ErrorSearch = "There was an error retrieving results";
+
+            Vista.Lang.DiscountTickets = "Discount Tickets";
+    </script>
+
+    <script src="//www.prime.jo/IT-CDN/JsBundle/MasterPageMvc?v=500.1216.0.0" type="text/javascript"></script>
+    <!--[if IE 6]>
+        <script src="//www.prime.jo/IT-CDN/Scripts/Navigation/IE6.js?v=500.1216.0.0" type="text/javascript"></script>
+
+    <![endif]-->
+    <script src="//www.prime.jo/IT-CDN/Scripts/Navigation/Index.js?v=500.1216.0.0" type="text/javascript"></script>
+
+    <script src="//www.prime.jo/IT-CDN/Scripts/Navigation/LanguageLocation.js?v=500.1216.0.0" type="text/javascript"></script>
+
+    <script src="//www.prime.jo/IT-CDN/JsBundle/Scrollbox?v=500.1216.0.0" type="text/javascript"></script>
+    <script src="//www.prime.jo/IT-CDN/Scripts/Vista/Collapsible.js?v=500.1216.0.0" type="text/javascript"></script>
+
+    <script src="//www.prime.jo/IT-CDN/Scripts/Vista/ModalError.js?v=500.1216.0.0" type="text/javascript"></script>
+
+    <script src="//www.prime.jo/IT-CDN/JsBundle/ImageGallery?v=500.1216.0.0" type="text/javascript"></script>
+    <script src="//www.prime.jo/IT-CDN/Scripts/Vista/Layout.js?v=500.1216.0.0" type="text/javascript"></script>
+
+
+
+    <script type="text/javascript">
+        Vista.Urls.Loyalty = {};
+        Vista.Urls.Loyalty.SendFacebookLikeFeedback = '/Browsing/Loyalty/SendMovieFacebookLikeFeedback';
+        Vista.Urls.Loyalty.SendTwitterTweetFeedback = '/Browsing/Loyalty/SendMovieTwitterTweetFeedback';
+        Vista.Urls.Loyalty.SubmitFilmTrailerRating = '//www.prime.jo/Browsing/Ratings/SubmitFilmTrailerRating';
+        Vista.Localisation.YouLikedTheTrailer = 'You liked the trailer!';
+        Vista.Localisation.YouDislikedTheTrailer = 'You disliked the trailer!';
+    </script>
+
+    <script src="//www.prime.jo/IT-CDN/JsBundle/Validation?v=500.1216.0.0" type="text/javascript"></script>
+    <script src="//www.prime.jo/IT-CDN/Scripts/jquery-ui-1.8.23.min.js?v=500.1216.0.0" type="text/javascript"></script>
+
+    <script src="//www.prime.jo/IT-CDN/Scripts/jquery.dotdotdot.min.js?v=500.1216.0.0" type="text/javascript"></script>
+
+    <script src="//www.prime.jo/IT-CDN/Scripts/Vista/Trailers/Trailers.js?v=500.1216.0.0" type="text/javascript"></script>
+
+    <script src="//www.prime.jo/IT-CDN/Scripts/Vista/Loyalty/AjaxifyLoyaltySignup.js?v=500.1216.0.0" type="text/javascript"></script>
+
+    <script src="//www.prime.jo/IT-CDN/Scripts/Vista/Loyalty/LoyaltyTrailerRate.js?v=500.1216.0.0" type="text/javascript"></script>
+
+    <script src="//www.prime.jo/IT-CDN/Scripts/Movies/MoviesList.js?v=500.1216.0.0" type="text/javascript"></script>
+
+    <script src="//www.prime.jo/IT-CDN/Scripts/Vista/SocialMedia/FacebookJavascriptSDK.js?v=500.1216.0.0" type="text/javascript"></script>
+
+    <script src="//www.prime.jo/IT-CDN/Scripts/Vista/SocialMedia/TwitterWidgets.js?v=500.1216.0.0" type="text/javascript"></script>
+
+    <script src="//www.prime.jo/IT-CDN/Scripts/Vista/Loyalty/MemberMovieFeedback.js?v=500.1216.0.0" type="text/javascript"></script>
+
+
+
+
+<script type="text/javascript">
+    Vista.Urls.QuickTickets = {};
+    Vista.Urls.QuickTickets.Movies = '/Browsing/QuickTickets/Movies';
+    Vista.Urls.QuickTickets.Cinemas = '/Browsing/QuickTickets/Cinemas';
+    Vista.Urls.QuickTickets.ShowTypes = '/Browsing/QuickTickets/Types';
+    Vista.Urls.QuickTickets.Times = '/Browsing/QuickTickets/Sessions';
+    Vista.Urls.QuickTickets.MovieImages = '//www.prime.jo/CDN/Image/Entity/FilmPosterGraphic/{0}?width=85&height=105';
+    Vista.Urls.QuickTickets.Ticket = '//www.prime.jo/Ticketing/visSelectTickets.aspx?cinemacode={0}&txtSessionId={1}&showtimeId={0}-{1}&visLang=1';
+    Vista.Urls.QuickTickets.Compare = '/Browsing/QuickTickets/Compare';
+
+    Vista.Lang.QuickTickets = {};
+    Vista.Lang.QuickTickets.Movies = "Movies";
+    Vista.Lang.QuickTickets.MovieNext = "Pick A Movie";
+    Vista.Lang.QuickTickets.MovieAny = "All Movies";
+
+    Vista.Lang.QuickTickets.Cinemas = "CinemasGet in on the action!";
+    Vista.Lang.QuickTickets.CinemaNext = "Pick A Cinema";
+    Vista.Lang.QuickTickets.CinemaAny = "All Locations";
+
+    Vista.Lang.QuickTickets.ShowTypes = "Show Types";
+    Vista.Lang.QuickTickets.ShowTypeNext = "Pick A Show Type";
+    Vista.Lang.QuickTickets.ShowTypeAny = "All Show Types";
+
+    Vista.Lang.QuickTickets.Times = "Times";
+    Vista.Lang.QuickTickets.TimeNext = "Pick A Time";
+    Vista.Lang.QuickTickets.TimeAny = "Any Time";
+    Vista.Lang.QuickTickets.TimeDay = "Day Time (Before 5pm)";
+    Vista.Lang.QuickTickets.TimeEvening = "Evening (After 5pm)";
+    Vista.Lang.QuickTickets.TimeLabel = "Starting Between";
+
+    Vista.Lang.QuickTickets.NoSessions = "No sessions for {0}. Pick a different day.";
+    Vista.Lang.QuickTickets.SoldOutSessions = "Sessions for {0} have sold out. Pick a different day.";
+    Vista.Lang.QuickTickets.BookNow = "Book Tickets";
+    Vista.Lang.QuickTickets.Compare = "Show Times";
+    Vista.Lang.QuickTickets.Today = "Today";
+
+    Vista.Formatting = {};
+    Vista.Formatting.TimeFormat = "hh:mm tt";
+</script>
+
+
+    <script src="//www.prime.jo/IT-CDN/JsBundle/QuickTickets?v=500.1216.0.0" type="text/javascript"></script>
+
+
+
+
+
+
+</body>
+</html>
