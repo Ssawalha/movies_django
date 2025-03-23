@@ -23,6 +23,8 @@ class GrandService:
                 for date in showing_dates:
                     showing_times = GrandService.get_showing_times(title, date)
                     for time in showing_times:
+                        print("DATE, TIME\n")
+                        print(date, time)
                         showings.append(
                             {
                                 "title": title.get("title"),
@@ -384,3 +386,8 @@ class TitleMatchService:
         ):
             return False
         return True
+
+
+if __name__ == "__main__":
+    grand_service = GrandService()
+    print(grand_service.get_showings())
