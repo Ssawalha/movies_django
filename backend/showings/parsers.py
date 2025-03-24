@@ -1,17 +1,15 @@
 import datetime
 import logging
-from abc import ABC, abstractmethod
 from functools import wraps
-from typing import Any, Dict, List, Optional
+from typing import Dict, List
 
 from bs4 import BeautifulSoup
-from bs4.builder import ParserRejectedMarkup
-from showings.base import handle_errors
 from showings.errors import (
     ElementNotFoundError,
     InvalidFormatError,
     ParserError,
 )
+from showings.service_base import handle_errors
 from showings.util import get_current_month, get_current_year
 
 logger = logging.getLogger(__name__)

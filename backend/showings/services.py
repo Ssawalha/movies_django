@@ -1,11 +1,11 @@
 import logging
 from typing import Any, Dict
 
-from showings.base import ServiceWrapper, handle_errors
 from showings.clients import GrandClient, PrimeClient, TajClient
 from showings.errors import ServiceError
 from showings.parsers import GrandParser, PrimeParser, TajParser
 from showings.serializers import GrandServiceGetShowingDatesSerializer
+from showings.service_base import ServiceWrapper, handle_errors
 
 logger = logging.getLogger(__name__)
 
