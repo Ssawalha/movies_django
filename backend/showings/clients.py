@@ -8,6 +8,7 @@ from movie_showings.settings import GRAND_BASE_URL, PRIME_BASE_URL, TAJ_BASE_URL
 from requests.exceptions import HTTPError, RequestException
 from rest_framework.exceptions import ValidationError
 
+from .errors import ClientError, HTTPClientError, NetworkError
 from .serializers import (
     GrandClientShowingDatesSerializer,
     GrandClientShowingTimesSerializer,
@@ -16,32 +17,6 @@ from .serializers import (
 )
 
 logger = logging.getLogger(__name__)
-
-
-class ClientError(Exception):
-    """Base exception for all client errors."""
-
-    def __init__(self, client: str, function: str, message: str) -> None:
-        self.client = client
-        self.function = function
-        super().__init__(f"{client}.{function}: {message}")
-
-
-class HTTPClientError(ClientError):
-    """Raised when an HTTP error occurs."""
-
-    def __init__(
-        self, client: str, function: str, status_code: int, message: str
-    ) -> None:
-        self.status_code = status_code
-        super().__init__(client, function, f"HTTP {status_code} - {message}")
-
-
-class NetworkError(ClientError):
-    """Raised when a network error occurs."""
-
-    def __init__(self, client: str, function: str, message: str) -> None:
-        super().__init__(client, function, f"Network error - {message}")
 
 
 def handle_client_errors(client_name: str) -> Callable:
@@ -60,19 +35,32 @@ def handle_client_errors(client_name: str) -> Callable:
             except ValidationError as e:
                 logger.error(f"{client_name}.{func.__name__} Validation error: {e}")
                 raise ClientError(
-                    client_name, func.__name__, f"Validation error: {e.detail}"
+                    message=f"Validation error: {e.detail}",
+                    source=client_name,
+                    cause=e,
                 )
             except HTTPError as e:
                 logger.error(f"{client_name}.{func.__name__} HTTP error: {e}")
                 raise HTTPClientError(
-                    client_name, func.__name__, e.response.status_code, str(e)
+                    message=str(e),
+                    status_code=e.response.status_code,
+                    source=client_name,
+                    cause=e,
                 )
             except RequestException as e:
                 logger.error(f"{client_name}.{func.__name__} Network error: {e}")
-                raise NetworkError(client_name, func.__name__, str(e))
+                raise NetworkError(
+                    message=str(e),
+                    source=client_name,
+                    cause=e,
+                )
             except Exception as e:
                 logger.error(f"{client_name}.{func.__name__} Unexpected error: {e}")
-                raise ClientError(client_name, func.__name__, str(e))
+                raise ClientError(
+                    message=str(e),
+                    source=client_name,
+                    cause=e,
+                )
 
         return wrapper
 
