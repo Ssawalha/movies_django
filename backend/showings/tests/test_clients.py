@@ -5,37 +5,8 @@ from django.test import TestCase
 from movie_showings.settings import GRAND_BASE_URL, PRIME_BASE_URL, TAJ_BASE_URL
 from requests import Response
 from requests.status_codes import codes
-from showings.clients import (
-    ClientError,
-    GrandClient,
-    HTTPClientError,
-    NetworkError,
-    PrimeClient,
-    TajClient,
-)
-
-
-class TestClientErrors(TestCase):
-    def test_client_error_initialization(self):
-        error = ClientError("TestClient", "test_function", "test message")
-        self.assertEqual(error.client, "TestClient")
-        self.assertEqual(error.function, "test_function")
-        self.assertEqual(str(error), "TestClient.test_function: test message")
-
-    def test_http_client_error_initialization(self):
-        error = HTTPClientError("TestClient", "test_function", 404, "Not Found")
-        self.assertEqual(error.client, "TestClient")
-        self.assertEqual(error.function, "test_function")
-        self.assertEqual(error.status_code, 404)
-        self.assertEqual(str(error), "TestClient.test_function: HTTP 404 - Not Found")
-
-    def test_network_error_initialization(self):
-        error = NetworkError("TestClient", "test_function", "Connection refused")
-        self.assertEqual(error.client, "TestClient")
-        self.assertEqual(error.function, "test_function")
-        self.assertEqual(
-            str(error), "TestClient.test_function: Network error - Connection refused"
-        )
+from showings.clients import GrandClient, PrimeClient, TajClient
+from showings.errors import ClientError, HTTPClientError, NetworkError
 
 
 class BaseClientTestCase(TestCase):
@@ -80,9 +51,9 @@ class TestGrandClient(BaseClientTestCase):
         mock_post.return_value = mock_response
         with self.assertRaises(HTTPClientError) as exc_info:
             self.client.get_titles_page()
-        self.assertIn(
-            "GrandClient.get_titles_page: HTTP 404 - 404 Not Found",
+        self.assertEqual(
             str(exc_info.exception),
+            "[GrandClient] http_error: HTTP 404 - 404 Not Found",
         )
 
     @patch("requests.post")
@@ -92,8 +63,9 @@ class TestGrandClient(BaseClientTestCase):
         )
         with self.assertRaises(NetworkError) as exc_info:
             self.client.get_titles_page()
-        self.assertIn(
-            "GrandClient.get_titles_page: Network error", str(exc_info.exception)
+        self.assertEqual(
+            str(exc_info.exception),
+            "[GrandClient] network_error: Network error - Connection refused",
         )
 
     @patch("requests.post")
@@ -121,9 +93,9 @@ class TestGrandClient(BaseClientTestCase):
         # Test with invalid data (empty string)
         with self.assertRaises(ClientError) as exc_info:
             self.client.get_title_showing_dates("")
-        self.assertIn(
-            "GrandClient.get_title_showing_dates: Validation error: {'grand_id': [ErrorDetail(string='This field cannot be empty.', code='blank')]}",
+        self.assertEqual(
             str(exc_info.exception),
+            "[GrandClient] client_error: Validation error: {'grand_id': [ErrorDetail(string='This field cannot be empty.', code='blank')]}",
         )
         mock_post.assert_not_called()  # Verify no HTTP request was made
 
@@ -146,7 +118,10 @@ class TestTajClient(BaseClientTestCase):
         mock_get.return_value = mock_response
         with self.assertRaises(HTTPClientError) as exc_info:
             self.client.get_titles_page()
-        self.assertIn("TajClient.get_titles_page: HTTP 404", str(exc_info.exception))
+        self.assertEqual(
+            str(exc_info.exception),
+            "[TajClient] http_error: HTTP 404 - 404 Not Found",
+        )
 
     @patch("requests.get")
     def test_get_title_showings_page_success(self, mock_get):
@@ -174,7 +149,10 @@ class TestPrimeClient(BaseClientTestCase):
         mock_get.return_value = mock_response
         with self.assertRaises(HTTPClientError) as exc_info:
             self.client.get_titles_page()
-        self.assertIn("PrimeClient.get_titles_page: HTTP 404", str(exc_info.exception))
+        self.assertEqual(
+            str(exc_info.exception),
+            "[PrimeClient] http_error: HTTP 404 - 404 Not Found",
+        )
 
     @patch("requests.get")
     def test_get_title_showings_page_success(self, mock_get):
