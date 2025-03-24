@@ -10,8 +10,8 @@ from showings.services import (
     GrandService,
     PrimeService,
     TajService,
-    TitleMatchService,
 )
+from showings.title_matching import TitleMatchService
 
 logger = logging.getLogger(__name__)
 

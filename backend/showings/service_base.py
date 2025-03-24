@@ -92,7 +92,6 @@ def handle_service_errors(operation: str, service_name: str) -> Callable:
                     f"HTTP error during {operation}",
                     extra={
                         "client": self.client.__class__.__name__,
-                        "status_code": e.status_code,
                         "error": str(e),
                     },
                     exc_info=True,
@@ -119,7 +118,6 @@ def handle_service_errors(operation: str, service_name: str) -> Callable:
                     f"Client error during {operation}",
                     extra={
                         "client": self.client.__class__.__name__,
-                        "function": e.function,
                         "error": str(e),
                     },
                     exc_info=True,
