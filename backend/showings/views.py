@@ -10,7 +10,7 @@ from showings.services import (
     GrandService,
     PrimeService,
     TajService,
-    TitleMatchingService,
+    TitleMatchService,
 )
 
 logger = logging.getLogger(__name__)
@@ -69,7 +69,7 @@ class ParseDataView(View):
             prime_titles = PrimeService.get_titles()
             taj_titles = TajService.get_titles()
 
-            matched_titles = TitleMatchingService.match_titles(
+            matched_titles = TitleMatchService.match_titles(
                 grand_titles, prime_titles, taj_titles
             )
             movies_created = 0
@@ -145,7 +145,6 @@ class ParseDataView(View):
                     "total_showings": len(all_showings),
                 }
             )
-
         except Exception as e:
             logger.error(f"Error parsing data: {str(e)}")
             if "batch" in locals():
