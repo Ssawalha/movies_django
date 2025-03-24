@@ -1,14 +1,13 @@
 import logging
-from datetime import date
 from functools import wraps
-from typing import Any, Callable, Dict, Optional, Protocol, Type, Union
+from typing import Any, Callable, Dict
 
 import requests
 from movie_showings.settings import GRAND_BASE_URL, PRIME_BASE_URL, TAJ_BASE_URL
 from requests.exceptions import HTTPError, RequestException
 from rest_framework.exceptions import ValidationError
 
-from .errors import ClientError, HTTPClientError, NetworkError
+from .errors import ClientError, HTTPClientError, NetworkError, SerializerError
 from .serializers import (
     GrandClientShowingDatesSerializer,
     GrandClientShowingTimesSerializer,
@@ -33,34 +32,38 @@ def handle_client_errors(client_name: str) -> Callable:
             try:
                 return func(*args, **kwargs)
             except ValidationError as e:
-                logger.error(f"{client_name}.{func.__name__} Validation error: {e}")
-                raise ClientError(
+                error = SerializerError(
                     message=f"Validation error: {e.detail}",
                     source=client_name,
                     cause=e,
                 )
+                error.log(logger)
+                raise error
             except HTTPError as e:
-                logger.error(f"{client_name}.{func.__name__} HTTP error: {e}")
-                raise HTTPClientError(
+                error = HTTPClientError(
                     message=str(e),
                     status_code=e.response.status_code,
                     source=client_name,
                     cause=e,
                 )
+                error.log(logger)
+                raise error
             except RequestException as e:
-                logger.error(f"{client_name}.{func.__name__} Network error: {e}")
-                raise NetworkError(
+                error = NetworkError(
                     message=str(e),
                     source=client_name,
                     cause=e,
                 )
+                error.log(logger)
+                raise error
             except Exception as e:
-                logger.error(f"{client_name}.{func.__name__} Unexpected error: {e}")
-                raise ClientError(
+                error = ClientError(
                     message=str(e),
                     source=client_name,
                     cause=e,
                 )
+                error.log(logger)
+                raise error
 
         return wrapper
 

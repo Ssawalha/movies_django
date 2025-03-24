@@ -1,4 +1,5 @@
 import unittest
+from unittest.mock import patch
 
 from showings.errors import ServiceError
 from showings.services import GrandService, PrimeService, TajService
@@ -17,11 +18,11 @@ class TestGrandService(unittest.TestCase):
         self.mock_times_page = "<html>Mock times page</html>"
 
     def test_get_showings(self):
-        with unittest.mock.patch.object(
+        with patch.object(
             GrandService, "get_titles", return_value=self.mock_titles
-        ), unittest.mock.patch.object(
+        ), patch.object(
             GrandService, "get_showing_dates", return_value=self.mock_dates
-        ), unittest.mock.patch.object(
+        ), patch.object(
             GrandService, "get_showing_times", return_value=self.mock_times
         ):
 
@@ -104,16 +105,16 @@ class TestGrandService(unittest.TestCase):
             self.assertEqual(showings, expected_showings)
 
     def test_get_showings_error(self):
-        with unittest.mock.patch.object(
+        with patch.object(
             GrandService, "get_titles", side_effect=Exception("Test error")
         ):
             with self.assertRaises(ServiceError):
                 GrandService.get_showings()
 
     def test_get_titles(self):
-        with unittest.mock.patch.object(
+        with patch.object(
             GrandService.client, "get_titles_page", return_value=self.mock_titles_page
-        ), unittest.mock.patch.object(
+        ), patch.object(
             GrandService.parser,
             "parse_titles_from_titles_page",
             return_value=self.mock_titles,
@@ -123,7 +124,7 @@ class TestGrandService(unittest.TestCase):
             self.assertEqual(titles, self.mock_titles)
 
     def test_get_titles_error(self):
-        with unittest.mock.patch.object(
+        with patch.object(
             GrandService.client, "get_titles_page", side_effect=Exception("Test error")
         ):
             with self.assertRaises(ServiceError):
@@ -131,11 +132,11 @@ class TestGrandService(unittest.TestCase):
 
     def test_get_showing_dates(self):
         title = {"title": "The Matrix", "grand_id": "1abc"}
-        with unittest.mock.patch.object(
+        with patch.object(
             GrandService.client,
             "get_title_showing_dates",
             return_value=self.mock_dates_page,
-        ), unittest.mock.patch.object(
+        ), patch.object(
             GrandService.parser, "parse_showing_dates", return_value=self.mock_dates
         ):
 
@@ -144,7 +145,7 @@ class TestGrandService(unittest.TestCase):
 
     def test_get_showing_dates_error(self):
         title = {"title": "The Matrix", "grand_id": "1abc"}
-        with unittest.mock.patch.object(
+        with patch.object(
             GrandService.client,
             "get_title_showing_dates",
             side_effect=Exception("Test error"),
@@ -155,11 +156,11 @@ class TestGrandService(unittest.TestCase):
     def test_get_showing_times(self):
         title = {"title": "The Matrix", "grand_id": "1abc"}
         date = "2024-03-20"
-        with unittest.mock.patch.object(
+        with patch.object(
             GrandService.client,
             "get_title_showing_times_on_date",
             return_value=self.mock_times_page,
-        ), unittest.mock.patch.object(
+        ), patch.object(
             GrandService.parser, "parse_showing_times", return_value=self.mock_times
         ):
 
@@ -169,7 +170,7 @@ class TestGrandService(unittest.TestCase):
     def test_get_showing_times_error(self):
         title = {"title": "The Matrix", "grand_id": "1abc"}
         date = "2024-03-20"
-        with unittest.mock.patch.object(
+        with patch.object(
             GrandService.client,
             "get_title_showing_times_on_date",
             side_effect=Exception("Test error"),
@@ -192,9 +193,9 @@ class TestTajService(unittest.TestCase):
         self.mock_showings_page = "<html>Mock showings page</html>"
 
     def test_get_showings(self):
-        with unittest.mock.patch.object(
+        with patch.object(
             TajService, "get_titles", return_value=self.mock_titles
-        ), unittest.mock.patch.object(
+        ), patch.object(
             TajService, "get_title_showings", return_value=self.mock_showings
         ):
 
@@ -209,16 +210,16 @@ class TestTajService(unittest.TestCase):
             self.assertEqual(showings, expected_showings)
 
     def test_get_showings_error(self):
-        with unittest.mock.patch.object(
+        with patch.object(
             TajService, "get_titles", side_effect=Exception("Test error")
         ):
             with self.assertRaises(ServiceError):
                 TajService.get_showings()
 
     def test_get_titles(self):
-        with unittest.mock.patch.object(
+        with patch.object(
             TajService.client, "get_titles_page", return_value=self.mock_titles_page
-        ), unittest.mock.patch.object(
+        ), patch.object(
             TajService.parser,
             "parse_titles_from_titles_page",
             return_value=self.mock_titles,
@@ -228,7 +229,7 @@ class TestTajService(unittest.TestCase):
             self.assertEqual(titles, self.mock_titles)
 
     def test_get_titles_error(self):
-        with unittest.mock.patch.object(
+        with patch.object(
             TajService.client, "get_titles_page", side_effect=Exception("Test error")
         ):
             with self.assertRaises(ServiceError):
@@ -236,15 +237,15 @@ class TestTajService(unittest.TestCase):
 
     def test_get_title_showings(self):
         title = {"title": "The Matrix", "taj_id": "1abc"}
-        with unittest.mock.patch.object(
+        with patch.object(
             TajService.client,
             "get_title_showings_page",
             return_value=self.mock_showings_page,
-        ), unittest.mock.patch.object(
+        ), patch.object(
             TajService.parser,
             "parse_showing_dates_from_title_page",
             return_value=["2024-03-20"],
-        ), unittest.mock.patch.object(
+        ), patch.object(
             TajService.parser,
             "parse_showing_times_from_title_page",
             return_value=self.mock_showings,
@@ -269,7 +270,7 @@ class TestTajService(unittest.TestCase):
 
     def test_get_title_showings_error(self):
         title = {"title": "The Matrix", "taj_id": "1abc"}
-        with unittest.mock.patch.object(
+        with patch.object(
             TajService.client,
             "get_title_showings_page",
             side_effect=Exception("Test error"),
@@ -293,9 +294,9 @@ class TestPrimeService(unittest.TestCase):
         self.mock_showings_page = "<html>Mock showings page</html>"
 
     def test_get_showings(self):
-        with unittest.mock.patch.object(
+        with patch.object(
             PrimeService, "get_titles", return_value=self.mock_titles
-        ), unittest.mock.patch.object(
+        ), patch.object(
             PrimeService, "get_title_showings", return_value=self.mock_showings
         ):
 
@@ -310,16 +311,16 @@ class TestPrimeService(unittest.TestCase):
             self.assertEqual(showings, expected_showings)
 
     def test_get_showings_error(self):
-        with unittest.mock.patch.object(
+        with patch.object(
             PrimeService, "get_titles", side_effect=Exception("Test error")
         ):
             with self.assertRaises(ServiceError):
                 self.service.get_showings()
 
     def test_get_titles(self):
-        with unittest.mock.patch.object(
+        with patch.object(
             PrimeService.client, "get_titles_page", return_value=self.mock_titles_page
-        ), unittest.mock.patch.object(
+        ), patch.object(
             PrimeService.parser,
             "parse_titles_from_titles_page",
             return_value=self.mock_titles,
@@ -329,7 +330,7 @@ class TestPrimeService(unittest.TestCase):
             self.assertEqual(titles, self.mock_titles)
 
     def test_get_titles_error(self):
-        with unittest.mock.patch.object(
+        with patch.object(
             PrimeService.client, "get_titles_page", side_effect=Exception("Test error")
         ):
             with self.assertRaises(ServiceError):
@@ -337,11 +338,11 @@ class TestPrimeService(unittest.TestCase):
 
     def test_get_title_showings(self):
         title = {"title": "The Matrix", "prime_id": "1abc"}
-        with unittest.mock.patch.object(
+        with patch.object(
             PrimeService.client,
             "get_title_showings_page",
             return_value=self.mock_showings_page,
-        ), unittest.mock.patch.object(
+        ), patch.object(
             PrimeService.parser,
             "parse_showings_from_title_page",
             return_value=self.mock_showings,
@@ -366,7 +367,7 @@ class TestPrimeService(unittest.TestCase):
 
     def test_get_title_showings_error(self):
         title = {"title": "The Matrix", "prime_id": "1abc"}
-        with unittest.mock.patch.object(
+        with patch.object(
             PrimeService.client,
             "get_title_showings_page",
             side_effect=Exception("Test error"),

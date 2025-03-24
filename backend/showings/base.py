@@ -1,11 +1,14 @@
 import logging
 from functools import wraps
-from typing import Any, Callable, Protocol, Type, TypeVar
+from typing import Any, Callable, Protocol, Type
 
 from rest_framework import serializers
 from showings.clients import ClientError, HTTPClientError, NetworkError
-from showings.errors import ServiceError
-from showings.parsers import ParserError
+from showings.errors import (
+    Error,
+    ParserError,
+    ServiceError,
+)
 
 
 class ClientProtocol(Protocol):
@@ -27,13 +30,43 @@ class ParserProtocol(Protocol):
 
 
 logger = logging.getLogger(__name__)
-T = TypeVar("T")
+
+
+def handle_errors(source: str, error_type: Type[Error]) -> Callable:
+    """
+    Decorator to handle errors consistently.
+
+    Args:
+        source: Name of the source for error attribution
+        error_type: Type of error to raise
+    """
+
+    def decorator(func: Callable[..., Any]) -> Callable[..., Any]:
+        @wraps(func)
+        def wrapper(*args: Any, **kwargs: Any) -> Any:
+            try:
+                return func(*args, **kwargs)
+            except Error as e:
+                e.log(logger)
+                raise
+            except Exception as e:
+                error = error_type(
+                    message=str(e),
+                    source=source,
+                    cause=e,
+                )
+                error.log(logger)
+                raise error
+
+        return wrapper
+
+    return decorator
 
 
 class ServiceWrapper:
-    """Base wrapper for all services."""
+    """Base class for services that use clients and parsers."""
 
-    def __init__(self, client: Type[ClientProtocol], parser: Type[ParserProtocol]):
+    def __init__(self, client, parser):
         self.client = client
         self.parser = parser
 
@@ -47,9 +80,9 @@ def handle_service_errors(operation: str, service_name: str) -> Callable:
         service_name: Name of the service for error attribution
     """
 
-    def decorator(func: Callable[..., T]) -> Callable[..., T]:
+    def decorator(func: Callable[..., Any]) -> Callable[..., Any]:
         @wraps(func)
-        def wrapper(self: ServiceWrapper, *args: Any, **kwargs: Any) -> T:
+        def wrapper(self: ServiceWrapper, *args: Any, **kwargs: Any) -> Any:
             try:
                 return func(self, *args, **kwargs)
             except ServiceError:
