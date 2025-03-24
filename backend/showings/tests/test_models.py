@@ -2,7 +2,7 @@ from datetime import timedelta
 
 from django.core.exceptions import ValidationError
 from django.utils import timezone
-from showings.models import Batch, Location, Movie, Showing
+from showings.models import Location, Movie, Showing
 from showings.tests.test_base import ShowingsTestCase
 
 
@@ -138,73 +138,3 @@ class TestShowing(ShowingsTestCase):
         showing = Showing(**invalid_data)
         with self.assertRaises(ValidationError):
             showing.full_clean()
-
-
-class TestBatch(ShowingsTestCase):
-    """Test cases for the Batch model."""
-
-    def setUp(self):
-        super().setUp()
-        self.valid_batch_data = {
-            "batch_id": f"BATCH_{self.fake.date_time().strftime('%Y_%m_%d')}",
-            "status": self.fake.random_element(
-                elements=[status[0] for status in Batch.Status.choices]
-            ),
-        }
-
-    def test_create_valid_batch(self):
-        """Test creating a valid batch."""
-        batch = Batch.objects.create(**self.valid_batch_data)
-        self.assertEqual(str(batch), f"{batch.batch_id} ({batch.status})")
-        self.assertTrue(batch.created_at)
-        self.assertTrue(batch.updated_at)
-
-    def test_unique_batch_id_constraint(self):
-        """Test unique constraint for batch ID."""
-        Batch.objects.create(**self.valid_batch_data)
-        with self.assertRaises(Exception):
-            Batch.objects.create(**self.valid_batch_data)
-
-    def test_valid_status_choices(self):
-        """Test valid status choices."""
-        batch = Batch.objects.create(**self.valid_batch_data)
-        for status in Batch.Status.choices:
-            batch.status = status[0]
-            batch.full_clean()
-            batch.save()
-
-    def test_invalid_status(self):
-        """Test validation of invalid status."""
-        invalid_data = self.valid_batch_data.copy()
-        invalid_data["status"] = "INVALID_STATUS"
-        batch = Batch(**invalid_data)
-        with self.assertRaises(ValidationError):
-            batch.full_clean()
-
-    def test_batch_relationships(self):
-        """Test batch relationships with movies and showings."""
-        batch = Batch.objects.create(**self.valid_batch_data)
-
-        movie = Movie.objects.create(
-            title=self.fake.catch_phrase(),
-            grand_id=f"G{self.fake.random_number(digits=6)}",
-            normalized_title=self.fake.catch_phrase().lower(),
-        )
-        location = Location.objects.create(
-            city=self.fake.city(), name=self.fake.company(), address=self.fake.address()
-        )
-        showing = Showing.objects.create(
-            movie=movie,
-            location=location,
-            date=timezone.now().date() + timedelta(days=1),
-            time=self.fake.time(),
-            is_showing=self.fake.boolean(),
-        )
-
-        batch.movies.add(movie)
-        batch.showings.add(showing)
-
-        self.assertEqual(batch.movies.count(), 1)
-        self.assertEqual(batch.showings.count(), 1)
-        self.assertEqual(batch.movies.first(), movie)
-        self.assertEqual(batch.showings.first(), showing)

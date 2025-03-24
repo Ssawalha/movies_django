@@ -33,10 +33,11 @@ def handle_parser_errors(source: str):
             except (ElementNotFoundError, InvalidFormatError):
                 raise
             except Exception as e:
-                logger.error(f"Parser error in {source}", exc_info=True)
-                raise ParserError(
+                error = ParserError(
                     f"Failed to parse content: {str(e)}", source=source, cause=e
                 )
+                error.log(logger)
+                raise error
 
         return wrapper
 

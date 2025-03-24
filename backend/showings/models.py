@@ -40,30 +40,6 @@ class Location(TimestampMixin):
             )
 
 
-class Batch(TimestampMixin):
-    class Status(models.TextChoices):
-        PENDING = "PENDING", "Pending"
-        PROCESSING = "PROCESSING", "Processing"
-        COMPLETED = "COMPLETED", "Completed"
-        FAILED = "FAILED", "Failed"
-
-    batch_id = models.CharField(max_length=100, unique=True, db_index=True)
-    showings = models.ManyToManyField("Showing", related_name="batches")
-    movies = models.ManyToManyField("Movie", related_name="batches")
-    status = models.CharField(
-        max_length=20, choices=Status.choices, default=Status.PENDING, db_index=True
-    )
-
-    class Meta:
-        ordering = ["-created_at"]
-        indexes = [
-            models.Index(fields=["status", "created_at"]),
-        ]
-
-    def __str__(self):
-        return f"{self.batch_id} ({self.status})"
-
-
 class Movie(TimestampMixin):
     title = models.CharField(max_length=100, db_index=True)
     grand_id = models.CharField(max_length=100, null=True, db_index=True)
