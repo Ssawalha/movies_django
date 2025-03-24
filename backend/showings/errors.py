@@ -1,52 +1,21 @@
+import logging
+
+
 class ErrorCode:
-    ERROR = "error"
+    """Error codes for the application."""
+
     SERVICE_ERROR = "service_error"
     CLIENT_ERROR = "client_error"
-    HTTP_ERROR = "http_error"
-    NETWORK_ERROR = "network_error"
     PARSER_ERROR = "parser_error"
     VALIDATION_ERROR = "validation_error"
-    SERIALIZER_ERROR = "serializer_error"
+    HTTP_ERROR = "http_error"
+    NETWORK_ERROR = "network_error"
+    ELEMENT_NOT_FOUND = "element_not_found"
+    INVALID_FORMAT = "invalid_format"
 
 
 class Error(Exception):
-    """Base exception class for all errors"""
-
-    def __init__(
-        self,
-        message: str,
-        code: str = ErrorCode.ERROR,
-        details: dict = None,
-        source: str = None,
-        cause: Exception = None,
-    ):
-        self.message = message
-        self.code = code
-        self.details = details or {}
-        self.source = source or self._get_source_from_cause(cause)
-        self.cause = cause
-        super().__init__(self.message)
-
-    def _get_source_from_cause(self, cause: Exception) -> str:
-        """Extract source from the exception's class name."""
-        if cause and hasattr(cause, "__class__"):
-            class_name = cause.__class__.__name__
-            if any(
-                class_name.endswith(suffix)
-                for suffix in ["Service", "Client", "Parser"]
-            ):
-                return class_name
-        return None
-
-    def __str__(self):
-        error_msg = f"{self.code}: {self.message}"
-        if self.source:
-            error_msg = f"[{self.source}] {error_msg}"
-        return error_msg
-
-
-class ServiceError(Error):
-    """Base class for all service-related errors."""
+    """Base error class for all application errors."""
 
     def __init__(
         self,
@@ -56,41 +25,74 @@ class ServiceError(Error):
         source: str = None,
         cause: Exception = None,
     ):
-        super().__init__(message, code, details, source, cause)
+        self.message = message
+        self.code = code
+        self.details = details or {}
+        self.source = source
+        self.cause = cause
+        super().__init__(self.message)
+
+    def __str__(self):
+        source = f"[{self.source}] " if self.source else ""
+        return f"{source}{self.code}: {self.message}"
+
+    def log(self, logger: logging.Logger) -> None:
+        logger.error(str(self), extra=self.details)
 
 
-class ClientError(ServiceError):
-    """Base class for all client-related errors."""
-
-    def __init__(
-        self,
-        message: str,
-        code: str = ErrorCode.CLIENT_ERROR,
-        details: dict = None,
-        source: str = None,
-        cause: Exception = None,
-    ):
-        super().__init__(message, code, details, source, cause)
-
-
-class HTTPClientError(ClientError):
-    """Raised when an HTTP error occurs."""
+class ServiceError(Error):
+    """Base error for service layer errors."""
 
     def __init__(
         self,
         message: str,
-        status_code: int,
         source: str = None,
         cause: Exception = None,
     ):
-        details = {"status_code": status_code}
         super().__init__(
-            message=f"HTTP {status_code} - {message}",
-            code=ErrorCode.HTTP_ERROR,
-            details=details,
+            message=message,
+            code=ErrorCode.SERVICE_ERROR,
             source=source,
             cause=cause,
         )
+
+
+class ClientError(Error):
+    """Base error for client layer errors."""
+
+    def __init__(
+        self,
+        message: str,
+        source: str = None,
+        cause: Exception = None,
+    ):
+        super().__init__(
+            message=message,
+            code=ErrorCode.CLIENT_ERROR,
+            source=source,
+            cause=cause,
+        )
+
+
+class HTTPClientError(ClientError):
+    """Raised when an HTTP request fails."""
+
+    def __init__(
+        self,
+        message: str,
+        status_code: int = None,
+        source: str = None,
+        cause: Exception = None,
+    ):
+        super().__init__(
+            message=message,
+            source=source,
+            cause=cause,
+        )
+        self.code = ErrorCode.HTTP_ERROR
+        if status_code:
+            self.details["status_code"] = status_code
+            self.message = f"HTTP {status_code} - {message}"
 
 
 class NetworkError(ClientError):
@@ -103,50 +105,80 @@ class NetworkError(ClientError):
         cause: Exception = None,
     ):
         super().__init__(
-            message=f"Network error - {message}",
-            code=ErrorCode.NETWORK_ERROR,
+            message=message,
+            source=source,
+            cause=cause,
+        )
+        self.code = ErrorCode.NETWORK_ERROR
+        self.message = f"Network error - {message}"
+
+
+class SerializerError(ClientError):
+    """Raised when data validation fails."""
+
+    def __init__(
+        self,
+        message: str,
+        source: str = None,
+        cause: Exception = None,
+        details: dict = None,
+    ):
+        super().__init__(
+            message=message,
+            source=source,
+            cause=cause,
+        )
+        self.code = ErrorCode.VALIDATION_ERROR
+        if details:
+            self.details.update(details)
+
+
+class ParserError(Error):
+    """Base error for parser layer errors."""
+
+    def __init__(
+        self,
+        message: str,
+        source: str = None,
+        cause: Exception = None,
+    ):
+        super().__init__(
+            message=message,
+            code=ErrorCode.PARSER_ERROR,
             source=source,
             cause=cause,
         )
 
 
-class ParserError(ServiceError):
-    """Parser error that can contain validation errors"""
+class ElementNotFoundError(ParserError):
+    """Raised when an element is not found in the HTML content."""
 
     def __init__(
         self,
         message: str,
-        code: str = ErrorCode.PARSER_ERROR,
-        details: dict = None,
         source: str = None,
         cause: Exception = None,
     ):
-        super().__init__(message, code, details, source, cause)
+        super().__init__(
+            message=message,
+            source=source,
+            cause=cause,
+        )
+        self.code = ErrorCode.ELEMENT_NOT_FOUND
 
 
-class ValidationError(ServiceError):
-    """Validation error that can be used by all other error types"""
+class InvalidFormatError(ParserError):
+    """Raised when the format of the HTML content is invalid."""
 
     def __init__(
         self,
         message: str,
-        code: str = ErrorCode.VALIDATION_ERROR,
-        details: dict = None,
         source: str = None,
         cause: Exception = None,
     ):
-        super().__init__(message, code, details, source, cause)
-
-
-class SerializerError(ServiceError):
-    """Serializer error for data validation and transformation errors"""
-
-    def __init__(
-        self,
-        message: str,
-        code: str = ErrorCode.SERIALIZER_ERROR,
-        details: dict = None,
-        source: str = None,
-        cause: Exception = None,
-    ):
-        super().__init__(message, code, details, source, cause)
+        super().__init__(
+            message=message,
+            source=source,
+            cause=cause,
+        )
+        self.code = ErrorCode.INVALID_FORMAT

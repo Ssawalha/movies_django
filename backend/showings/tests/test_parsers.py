@@ -1,7 +1,13 @@
 import os
 import unittest
+from enum import Enum
 
-from showings.parsers import GrandParser, ParserError, PrimeParser, TajParser
+from showings.errors import (
+    ElementNotFoundError,
+    InvalidFormatError,
+    ParserError,
+)
+from showings.parsers import GrandParser, PrimeParser, TajParser
 
 
 def load_test_data(filename: str) -> bytes:
@@ -32,7 +38,7 @@ class TestGrandParser(unittest.TestCase):
             self.parser.parse_titles_from_titles_page(b"invalid html")
         self.assertEqual(
             str(cm.exception),
-            "GrandParser.parse_titles_from_titles_page: No valid movie titles found in the page",
+            "[GrandParser] element_not_found: No valid movie titles found in the page",
         )
 
     def test_parse_titles_from_titles_page_empty_html(self):
@@ -40,7 +46,7 @@ class TestGrandParser(unittest.TestCase):
             self.parser.parse_titles_from_titles_page(b"")
         self.assertEqual(
             str(cm.exception),
-            "GrandParser.parse_titles_from_titles_page: No valid movie titles found in the page",
+            "[GrandParser] element_not_found: No valid movie titles found in the page",
         )
 
     def test_parse_titles_from_titles_page_no_titles(self):
@@ -48,7 +54,16 @@ class TestGrandParser(unittest.TestCase):
             self.parser.parse_titles_from_titles_page(b"<html><body></body></html>")
         self.assertEqual(
             str(cm.exception),
-            "GrandParser.parse_titles_from_titles_page: No valid movie titles found in the page",
+            "[GrandParser] element_not_found: No valid movie titles found in the page",
+        )
+
+    def test_parse_titles_from_titles_page_missing_label_attrs(self):
+        html = b"<html><body><label>Title</label></body></html>"
+        with self.assertRaises(ElementNotFoundError) as cm:
+            self.parser.parse_titles_from_titles_page(html)
+        self.assertEqual(
+            str(cm.exception),
+            "[GrandParser] element_not_found: No valid movie titles found in the page",
         )
 
     def test_parse_showing_dates_success(self):
@@ -63,7 +78,16 @@ class TestGrandParser(unittest.TestCase):
             self.parser.parse_showing_dates(b"invalid html")
         self.assertEqual(
             str(cm.exception),
-            "GrandParser.parse_showing_dates: No valid dates found in the page",
+            "[GrandParser] element_not_found: No valid dates found in the page",
+        )
+
+    def test_parse_showing_dates_malformed_html(self):
+        html = b"<html><body><div>No dates here</div></body></html>"
+        with self.assertRaises(ElementNotFoundError) as cm:
+            self.parser.parse_showing_dates(html)
+        self.assertEqual(
+            str(cm.exception),
+            "[GrandParser] element_not_found: No valid dates found in the page",
         )
 
     def test_parse_showing_times_success(self):
@@ -78,7 +102,7 @@ class TestGrandParser(unittest.TestCase):
             self.parser.parse_showing_times(b"invalid html")
         self.assertEqual(
             str(cm.exception),
-            "GrandParser.parse_showing_times: No valid times found in the page",
+            "[GrandParser] element_not_found: No valid times found in the page",
         )
 
 
@@ -101,7 +125,7 @@ class TestTajParser(unittest.TestCase):
             self.parser.parse_titles_from_titles_page(b"invalid html")
         self.assertEqual(
             str(cm.exception),
-            "TajParser.parse_titles_from_titles_page: No movies container found in the page",
+            "[TajParser] element_not_found: No movies container found in the page",
         )
 
     def test_parse_titles_from_titles_page_empty_html(self):
@@ -109,7 +133,7 @@ class TestTajParser(unittest.TestCase):
             self.parser.parse_titles_from_titles_page(b"")
         self.assertEqual(
             str(cm.exception),
-            "TajParser.parse_titles_from_titles_page: No movies container found in the page",
+            "[TajParser] element_not_found: No movies container found in the page",
         )
 
     def test_parse_titles_from_titles_page_no_titles(self):
@@ -117,7 +141,16 @@ class TestTajParser(unittest.TestCase):
             self.parser.parse_titles_from_titles_page(b"<html><body></body></html>")
         self.assertEqual(
             str(cm.exception),
-            "TajParser.parse_titles_from_titles_page: No movies container found in the page",
+            "[TajParser] element_not_found: No movies container found in the page",
+        )
+
+    def test_parse_titles_from_titles_page_missing_link(self):
+        html = b"<html><body><div class='prs_upcom_slider_slides_wrapper'><div class='prs_upcom_movie_content_box'></div></div></body></html>"
+        with self.assertRaises(ParserError) as cm:
+            self.parser.parse_titles_from_titles_page(html)
+        self.assertEqual(
+            str(cm.exception),
+            "[TajParser] parser_error: 'NoneType' object has no attribute 'text'",
         )
 
     def test_parse_showing_dates_from_title_page_success(self):
@@ -133,7 +166,16 @@ class TestTajParser(unittest.TestCase):
             self.parser.parse_showing_dates_from_title_page(b"invalid html")
         self.assertEqual(
             str(cm.exception),
-            "TajParser.parse_showing_dates_from_title_page: No booking dates container found in the page",
+            "[TajParser] element_not_found: No booking dates container found in the page",
+        )
+
+    def test_parse_showing_dates_from_title_page_missing_href(self):
+        html = b"<html><body><div id='booking-dates'><a>Date</a></div></body></html>"
+        with self.assertRaises(InvalidFormatError) as cm:
+            self.parser.parse_showing_dates_from_title_page(html)
+        self.assertEqual(
+            str(cm.exception),
+            "[TajParser] invalid_format: Invalid date format: missing date_id",
         )
 
     def test_parse_showing_times_from_title_page_success(self):
@@ -153,7 +195,7 @@ class TestTajParser(unittest.TestCase):
             self.parser.parse_showing_times_from_title_page(b"invalid html", [])
         self.assertEqual(
             str(cm.exception),
-            "TajParser.parse_showing_times_from_title_page: No valid showing times found in the page",
+            "[TajParser] element_not_found: No valid showing times found in the page",
         )
 
     def test_format_parsed_showing_dates_success(self):
@@ -167,13 +209,33 @@ class TestTajParser(unittest.TestCase):
         self.assertEqual(result[1]["date_id"], "date-320")
 
     def test_format_parsed_showing_dates_error(self):
-        with self.assertRaises(ValueError) as cm:
+        with self.assertRaises(InvalidFormatError) as cm:
             self.parser.format_parsed_showing_dates(
                 [{"date": "invalid", "date_id": "date1"}]
             )
         self.assertEqual(
             str(cm.exception),
-            "TajParser.format_parsed_showing_dates: No valid formatted dates found",
+            "[TajParser] invalid_format: Invalid date format: invalid literal for int() with base 10: 'invalid'",
+        )
+
+    def test_format_parsed_showing_dates_invalid_day(self):
+        with self.assertRaises(InvalidFormatError) as cm:
+            self.parser.format_parsed_showing_dates(
+                [{"date": "Sun 32", "date_id": "#date-1"}]
+            )
+        self.assertEqual(
+            str(cm.exception),
+            "[TajParser] invalid_format: Day must be between 1 and 31",
+        )
+
+    def test_format_parsed_showing_dates_invalid_date_format(self):
+        with self.assertRaises(InvalidFormatError) as cm:
+            self.parser.format_parsed_showing_dates(
+                [{"date": "Invalid", "date_id": "#date-1"}]
+            )
+        self.assertEqual(
+            str(cm.exception),
+            "[TajParser] invalid_format: Invalid date format: invalid literal for int() with base 10: 'Invalid'",
         )
 
 
@@ -196,7 +258,7 @@ class TestPrimeParser(unittest.TestCase):
             self.parser.parse_titles_from_titles_page(b"invalid html")
         self.assertEqual(
             str(cm.exception),
-            "PrimeParser.parse_titles_from_titles_page: No movies list found in the page",
+            "[PrimeParser] element_not_found: No movies container found in the page",
         )
 
     def test_parse_titles_from_titles_page_empty_html(self):
@@ -204,7 +266,7 @@ class TestPrimeParser(unittest.TestCase):
             self.parser.parse_titles_from_titles_page(b"")
         self.assertEqual(
             str(cm.exception),
-            "PrimeParser.parse_titles_from_titles_page: No movies list found in the page",
+            "[PrimeParser] element_not_found: No movies container found in the page",
         )
 
     def test_parse_titles_from_titles_page_no_titles(self):
@@ -212,7 +274,16 @@ class TestPrimeParser(unittest.TestCase):
             self.parser.parse_titles_from_titles_page(b"<html><body></body></html>")
         self.assertEqual(
             str(cm.exception),
-            "PrimeParser.parse_titles_from_titles_page: No movies list found in the page",
+            "[PrimeParser] element_not_found: No movies container found in the page",
+        )
+
+    def test_parse_titles_from_titles_page_missing_href(self):
+        html = b"<html><body><article id='movies-list'><div class='title-wrapper'><h3>Title</h3></div></article></body></html>"
+        with self.assertRaises(ParserError) as cm:
+            self.parser.parse_titles_from_titles_page(html)
+        self.assertEqual(
+            str(cm.exception),
+            "[PrimeParser] parser_error: 'NoneType' object is not subscriptable",
         )
 
     def test_parse_showings_from_title_page_success(self):
@@ -229,5 +300,29 @@ class TestPrimeParser(unittest.TestCase):
             self.parser.parse_showings_from_title_page("invalid html")
         self.assertEqual(
             str(cm.exception),
-            "PrimeParser.parse_showings_from_title_page: No film items found in the page",
+            "[PrimeParser] element_not_found: No film items found in the page",
         )
+
+    def test_parse_showings_from_title_page_invalid_datetime(self):
+        html = "<html><body><div class='film-item'><h3 class='film-title'>Theater</h3><time datetime='invalid'></time></div></body></html>"
+        with self.assertRaises(ParserError) as cm:
+            self.parser.parse_showings_from_title_page(html)
+        self.assertEqual(
+            str(cm.exception),
+            "[PrimeParser] invalid_format: Invalid datetime format: time data 'invalid' does not match format '%Y-%m-%dT%H:%M:%S'",
+        )
+
+    def test_parse_showings_from_title_page_missing_datetime(self):
+        html = "<html><body><div class='film-item'><h3 class='film-title'>Theater</h3><time></time></div></body></html>"
+        with self.assertRaises(ParserError) as cm:
+            self.parser.parse_showings_from_title_page(html)
+        self.assertEqual(
+            str(cm.exception),
+            "[PrimeParser] parser_error: 'datetime'",
+        )
+
+
+class ErrorCode(Enum):
+    SERVICE_ERROR = "service_error"
+    CLIENT_ERROR = "client_error"
+    # ...
